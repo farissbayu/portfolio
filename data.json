@@ -1,41 +1,42 @@
 {
   "personal_information": {
-    "name": "Faris Bayu Setyawan [cite: 1]",
-    "location": "Malang, 65152 [cite: 2]",
-    "phone": "+62 822 3226 5913 [cite: 2]",
-    "email": "bayustfa@gmail.com [cite: 2]",
-    "linkedin": "https://www.linkedin.com/in/faris-bavu-setyawan-42366a205/ [cite: 2]"
+    "name": "Faris Bayu Setyawan",
+    "location": "Malang, 65152",
+    "phone": "+62 822 3226 5913",
+    "email": "bayustfa@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/faris-bayu-setyawan-42366a205/"
   },
-  "profile": "A passionate Fullstack Web Developer with hands-on experience in building modern, responsive, and scalable web applications using React, Next.js, TypeScript, and Laravel. Skilled in both frontend and backend development, with a strong understanding of UI/UX principles and database design. Demonstrated experience in public sector digital projects and freelance applications, with a focus on clean code, performance, and usability. [cite: 4, 5]",
+  "profile": "Fullstack Web Developer with hands-on experience building scalable web applications and digital solutions across public-sector and private-sector projects. Experienced in developing both frontend and backend systems using React, TypeScript, Laravel, and PHP, with a strong foundation in database design, UI/UX, and system integration. Also experienced in AI/LLM integration, including RAG, AI agents, automated reporting, and API development with Python and FastAPI. Focused on building practical, maintainable, and user-oriented solutions from requirements gathering through deployment.",
   "work_experience": [
     {
       "company": "Dinas Komunikasi dan Informatika Kabupaten Pasuruan",
       "position": "Fullstack Developer",
-      "period": "Aug 2025-Now",
-      "location": "Online",
+      "period": "Aug 2025 - Now",
+      "location": "Pasuruan, Indonesia",
       "responsibilities": [
-        "Redesigned and modernized the official website of Kabupaten Pasuruan, improving UI/UX and performance.",
         "Developed a web-based job analysis application to support internal HR data management and efficiency.",
-        "Successfully migrated SIM PKK app to a self-hosted VPS environment with Nginx and MinIO S3 implies improvement in data control.",
-        "Collaborate with internal teams to gather requirements, design database structures, and implement scalable web solutions."
+        "Developed SGS Pendidikan, a grant management platform for schools under the Pasuruan Regency Education Office, covering school data management, grant applications, verification, and reporting/SPJ workflows.",
+        "Developed project management features for the TIK Asset Management System, enabling developers to track tasks and projects with direct integration to a self-hosted GitLab instance.",
+        "Implemented AI-assisted automated reporting to generate monthly project reports based on developers' completed tasks and activities.",
+        "Collaborated with internal teams and other service organizations to gather requirements, design database structures, and implement scalable web solutions."
       ],
       "technologies": [
         "PHP",
-        "Typescript",
+        "TypeScript",
         "React",
         "Laravel",
         "Bootstrap",
-        "TailwindCSS",
+        "Tailwind CSS",
         "MySQL"
       ]
     },
     {
       "company": "PT Tetanggaku Saling Bantu",
       "position": "Software Engineer Intern",
-      "period": "Oct 2023- 2023",
-      "location": "Kota Jakarta Selatan",
+      "period": "Oct 2023 - Nov 2023",
+      "location": "Kota Jakarta Selatan, Indonesia",
       "responsibilities": [
-        "Developed a simple backend API for fraud detection, later integrated as a foundation for fraud prevention features in chat systems.",
+        "Developed a backend API for fraud detection, which was later integrated as a foundation for fraud prevention features in chat systems.",
         "Built a machine learning model to identify potential fraudulent activity based on user input data.",
         "Conducted manual QA testing for the Tetanggaku mobile application to ensure reliability and user experience quality."
       ],
@@ -43,87 +44,160 @@
     }
   ],
   "certifications": [
-    "Complete Intro to SQL & PostgreSQL | Frontend Masters (2025)",
-    "Fullstack Javascript Bootcamp | Devscale Indonesia (2025)",
-    "Belajar Membuat Aplikasi Android Intermediate | Dicoding (2023)"
+    {
+      "name": "AI Enabled Python Web Development Bootcamp",
+      "issuer": "Devscale Indonesia",
+      "year": 2026
+    },
+    {
+      "name": "Fullstack Javascript Bootcamp",
+      "issuer": "Devscale Indonesia",
+      "year": 2025
+    },
+    {
+      "name": "Belajar Membuat Aplikasi Android Intermediate",
+      "issuer": "Dicoding",
+      "year": 2023
+    }
   ],
   "projects": [
     {
-      "name": "Achivio",
-      "role": "Frontend Developer",
-      "description": "Freelance project providing an alternative question bank and tryout platform to help students prepare for exams.",
+      "name": "SGS Pendidikan",
+      "role": "Fullstack Developer",
+      "description": "A grant management platform for schools under the Pasuruan Regency Education Office.",
       "responsibilities": [
-        "Developed key features including user authentication, question and answer management interface, and responsive UI design.",
-        "Collaborated with a small team to ensure performance, accessibility, and intuitive user experience."
+        "Developed school data management features.",
+        "Implemented grant application workflows.",
+        "Developed verification and reporting/SPJ workflows."
       ],
-      "technologies": ["Typescript", "React", "Tailwind CSS", "Shaden UI"]
+      "technologies": ["PHP", "TypeScript", "React", "Laravel", "MySQL"]
     },
     {
-      "name": "Bilik Tani",
-      "role": "Frontend Developer",
-      "description": "web app to help farmers calculate crop productivity forecasts, agricultural land drainage and information of plants and pests.",
+      "name": "TIK Asset Management System",
+      "role": "Fullstack Developer",
+      "description": "A project management system for tracking development tasks and projects with integration to a self-hosted GitLab instance.",
       "responsibilities": [
-        "Developed feature user authentication, plant and pests information page, short note page and planting schedule data."
+        "Developed project and task management features for developers.",
+        "Integrated the system with a self-hosted GitLab instance.",
+        "Implemented AI-assisted automated reporting to generate monthly project reports from completed tasks and activities."
       ],
-      "technologies": ["Javascript", "Next JS 14", "Tailwind CSS", "Shaden UI"]
+      "technologies": [
+        "PHP",
+        "TypeScript",
+        "React",
+        "Laravel",
+        "MySQL",
+        "GitLab",
+        "AI/LLM"
+      ]
+    },
+    {
+      "name": "Job Analysis Application",
+      "role": "Fullstack Developer",
+      "description": "A web-based application developed to support internal HR data management and improve job analysis processes.",
+      "responsibilities": [
+        "Developed web-based features for job analysis.",
+        "Supported internal HR data management and operational efficiency."
+      ],
+      "technologies": ["PHP", "TypeScript", "React", "Laravel", "MySQL"]
     },
     {
       "name": "Besmart",
       "role": "Frontend Developer",
-      "description": "Web and mobile application to support PT. Amerta Indah Otsuka marketing team to record their employee activity",
+      "description": "A web and mobile application developed to support PT. Amerta Indah Otsuka's marketing team in recording employee activities.",
       "responsibilities": [
-        "Developed frontend web application for admin dashboard, integrating with backend service for data handling."
+        "Developed the frontend web application for the admin dashboard.",
+        "Integrated the frontend application with backend services for data handling."
       ],
-      "technologies": ["Typescript", "Angular"]
+      "technologies": ["TypeScript", "Angular"]
     }
   ],
   "achievements": [
-    "Finalist Gen Al Hackathon APAC Edition (2024): Work as Mobile Developer using Kotlin",
-    "Top 65 Capstone Project Bangkit Academy (2023): Work as Mobile Developer using Kotlin"
+    {
+      "title": "Finalist Gen AI Hackathon APAC Edition",
+      "year": 2024,
+      "role": "Mobile Developer",
+      "technology": "Kotlin"
+    },
+    {
+      "title": "Top 65 Capstone Project Bangkit Academy",
+      "year": 2023,
+      "role": "Mobile Developer",
+      "technology": "Kotlin"
+    }
   ],
   "education": [
     {
       "institution": "IPB University",
-      "location": "Bogor",
-      "degree": "Computer Science Department, Faculty of Mathematics and Natural Sciences/Bachelor's Degree, S-1",
-      "gpa": "3.73/4.00",
-      "period": "Aug 2020-Aug 2024"
+      "location": "Bogor, Indonesia",
+      "degree": "Bachelor's Degree in Computer Science, Faculty of Mathematics and Natural Sciences",
+      "period": "Aug 2020 - Aug 2024",
+      "gpa": "3.73/4.00"
     },
     {
       "institution": "Bangkit Academy led by Google, Tokopedia, Gojek, & Traveloka",
-      "cohort": "Mobile Development Cohort",
-      "period": "Feb 2023-Jul 2023",
+      "location": "Online",
+      "program": "Mobile Development Cohort",
+      "period": "Feb 2023 - Jul 2023",
       "details": [
-        "Being one of 5.010 students who were selected from 67.387 applicants across Indonesia.",
-        "TOP 65 Capstone Project"
+        "Selected as one of 5,010 students from 67,387 applicants across Indonesia.",
+        "Achieved Top 65 Capstone Project."
       ]
     },
     {
       "institution": "Devscale Indonesia",
       "location": "Online",
-      "cohort": "Fullstack Development Cohort",
-      "period": "Jan 2025-March 2025",
+      "program": "AI Enabled Python Web Development Cohort",
+      "period": "Jan 2026 - Apr 2026",
       "details": [
-        "Completed intensive fullstack development bootcamp with Next JS technology",
-        "Be able to build a fullstack website from scratch, including file storage, oauth and LLM integration."
+        "Completed an intensive fullstack development bootcamp covering Python, FastAPI, database design, deployment, LLMs, RAG, and AI agent development.",
+        "Built AI-powered web applications integrating OpenAI SDK, function calling, streaming, RAG, embeddings, OCR, MCP, and agentic workflows.",
+        "Gained hands-on experience with Linux server deployment, Nginx, Cloudflare, authentication, SQLModel, Alembic, and modern frontend integration."
+      ]
+    },
+    {
+      "institution": "Devscale Indonesia",
+      "location": "Online",
+      "program": "Fullstack Development Cohort",
+      "period": "Jan 2025 - Mar 2025",
+      "details": [
+        "Completed an intensive fullstack development bootcamp with Next.js technology.",
+        "Built fullstack websites from scratch including file storage, OAuth, and LLM integration."
       ]
     }
   ],
-  "skills": [
-    "HTML",
-    "CSS",
-    "Javascript",
-    "Typescript",
-    "PHP",
-    "Laravel",
-    "React JS",
-    "Next JS",
-    "Angular",
-    "Prisma",
-    "MySQL",
-    "PostgreSQL",
-    "Tailwind CSS",
-    "Cloudflare R2 [cite: 6]",
-    "Vercel [cite: 6]"
-  ]
+  "skills": {
+    "frontend": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "TypeScript",
+      "React JS",
+      "Next JS",
+      "Angular",
+      "Tailwind CSS"
+    ],
+    "backend": ["PHP", "Laravel", "Python", "FastAPI"],
+    "database": ["MySQL", "PostgreSQL", "Prisma", "SQLModel", "Alembic"],
+    "ai_and_llm": [
+      "LLM Integration",
+      "RAG",
+      "AI Agents",
+      "OpenAI SDK",
+      "Function Calling",
+      "Streaming",
+      "Embeddings",
+      "OCR",
+      "MCP",
+      "Agentic Workflows"
+    ],
+    "devops_and_infrastructure": [
+      "Linux",
+      "Nginx",
+      "Cloudflare",
+      "Cloudflare R2",
+      "Vercel",
+      "GitLab"
+    ]
+  }
 }
