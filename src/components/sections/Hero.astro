@@ -1,0 +1,84 @@
+---
+import { Image } from "astro:assets";
+import photo from "../../assets/photo_profile.jpeg";
+import StatusPill from "../common/StatusPill.astro";
+import { personal_information, profile } from "../../lib/portfolio";
+
+const roles = ["Fullstack Developer", "AI/LLM Integration", "React · Laravel · FastAPI"];
+
+const links = [
+  { label: "email", href: `mailto:${personal_information.email}` },
+  { label: "linkedin", href: personal_information.linkedin },
+  { label: "location", href: `https://www.google.com/maps?q=${encodeURIComponent(personal_information.location)}` },
+];
+---
+
+<section id="about" class="reveal scroll-mt-24">
+  <StatusPill />
+
+  <div class="mt-8 grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.4fr_1fr]">
+    <div>
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-matcha-300">
+        $ whoami
+      </p>
+      <h1 class="mt-4 font-display text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
+        {personal_information.name}
+      </h1>
+
+      <div class="mt-5 flex flex-wrap gap-2">
+        {
+          roles.map((role) => (
+            <span class="rounded border border-zinc-800 bg-zinc-900/40 px-2.5 py-1 font-mono text-[11px] text-zinc-400">
+              {role}
+            </span>
+          ))
+        }
+      </div>
+
+      <p class="mt-7 max-w-2xl text-base font-light leading-relaxed text-zinc-400 sm:text-lg">
+        {profile}
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        {
+          links.map((link) => (
+            <a
+              href={link.href}
+              target={link.href.startsWith("http") ? "_blank" : undefined}
+              rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+              class="rounded-md border border-zinc-800 bg-zinc-900/40 px-3.5 py-2 font-mono text-[11px] text-zinc-400 transition-all duration-200 hover:-translate-y-0.5 hover:border-matcha-700 hover:text-matcha-300"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="relative">
+      <div class="tech-card scanlines overflow-hidden rounded-xl border border-zinc-800/80 bg-zinc-900/40">
+        <div class="flex items-center gap-2 border-b border-zinc-800/80 px-4 py-2.5">
+          <span class="h-2.5 w-2.5 rounded-full bg-zinc-700"></span>
+          <span class="h-2.5 w-2.5 rounded-full bg-zinc-700"></span>
+          <span class="h-2.5 w-2.5 rounded-full bg-matcha-600"></span>
+          <span class="ml-2 font-mono text-[10px] text-zinc-400">~/profile.jpeg</span>
+        </div>
+        <div class="relative">
+          <Image
+            src={photo}
+            alt={`Portrait of ${personal_information.name}`}
+            widths={[320, 640]}
+            sizes="(max-width: 1024px) 100vw, 380px"
+            format="webp"
+            class="h-auto w-full object-cover"
+          />
+          <span class="scanline"></span>
+        </div>
+        <div class="flex items-center justify-between border-t border-zinc-800/80 px-4 py-2">
+          <span class="font-mono text-[10px] text-zinc-400">{personal_information.location}</span>
+          <span class="font-mono text-[10px] text-signal-500">● online</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,59 @@
+---
+import SectionHeader from "../common/SectionHeader.astro";
+import Badge from "../common/Badge.astro";
+import { work_experience } from "../../lib/portfolio";
+---
+
+<section id="work" class="reveal scroll-mt-24">
+  <SectionHeader index="02" title="work_experience" meta="[ 2023 — present ]" />
+
+  <div class="space-y-6">
+    {
+      work_experience.map((job, i) => (
+        <article
+          class:list={[
+            "tech-card group relative rounded-xl border p-6 transition-all duration-300 sm:p-8",
+            i === 0
+              ? "border-matcha-800/60 bg-gradient-to-b from-matcha-950/20 to-zinc-900/40"
+              : "border-zinc-800/80 bg-zinc-900/30 hover:border-matcha-800/60",
+          ]}
+        >
+          <div class="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-matcha-500/70 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
+
+          <div class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <div class="flex items-center gap-3">
+                <span class="font-mono text-[11px] text-matcha-300">
+                  0x{String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 class="font-display text-lg font-semibold tracking-tight text-zinc-100">
+                  {job.position}
+                </h3>
+              </div>
+              <p class="mt-1 text-sm text-zinc-400">{job.company}</p>
+            </div>
+            <div class="text-left sm:text-right">
+              <p class="font-mono text-[11px] text-zinc-400">{job.period}</p>
+              <p class="font-mono text-[11px] text-zinc-400">{job.location}</p>
+            </div>
+          </div>
+
+          <ul class="mt-5 space-y-2.5">
+            {job.responsibilities.map((item) => (
+              <li class="flex gap-3 text-sm font-light leading-relaxed text-zinc-400">
+                <span class="mt-0.5 font-mono text-matcha-300">&gt;</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div class="mt-6 flex flex-wrap gap-2">
+            {job.technologies.map((tech) => (
+              <Badge label={tech} accent={["AI/LLM", "GitLab"].includes(tech)} />
+            ))}
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>

@@ -1,0 +1,33 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { formatDate, readingTime } from "../../lib/utils";
+
+interface Props {
+  entry: CollectionEntry<"articles">;
+}
+
+const { entry } = Astro.props;
+const { title, description, publishedDate, tags } = entry.data;
+const minutes = entry.body ? readingTime(entry.body) : 1;
+---
+
+<a
+  href={`/articles/${entry.id}/`}
+  class="tech-card group flex flex-col rounded-xl border border-zinc-800/80 bg-zinc-900/30 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-matcha-600/50"
+>
+  <div class="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-matcha-500/70 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
+
+  <div class="flex items-center justify-between font-mono text-[11px] text-zinc-400">
+    <span>{formatDate(publishedDate)}</span>
+    <span>{minutes} min read</span>
+  </div>
+
+  <h3 class="mt-4 font-display text-base font-semibold tracking-tight text-zinc-100 transition-colors group-hover:text-matcha-300">
+    {title}
+  </h3>
+  <p class="mt-2 flex-1 text-sm font-light leading-relaxed text-zinc-400">{description}</p>
+
+  <div class="mt-5 flex flex-wrap gap-2">
+    {tags.map((tag) => <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-matcha-300">#{tag}</span>)}
+  </div>
+</a>

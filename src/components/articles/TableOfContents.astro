@@ -1,0 +1,36 @@
+---
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+const visible = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
+---
+
+{
+  visible.length > 0 && (
+    <nav aria-label="Table of contents" class="font-mono text-[11px]">
+      <p class="text-matcha-300">
+        <span class="text-matcha-300/60">~/</span>on_this_page
+      </p>
+      <ul class="mt-4 space-y-2.5">
+        {visible.map((heading) => (
+          <li class={heading.depth === 3 ? "pl-4" : ""}>
+            <a
+              href={`#${heading.slug}`}
+              class="text-zinc-400 transition-colors hover:text-matcha-300"
+            >
+              {heading.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}

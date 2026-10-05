@@ -1,0 +1,10 @@
+---
+import SectionHeader from "../common/SectionHeader.astro";
+import ProjectFilter from "../islands/ProjectFilter.tsx";
+import { projects } from "../../lib/portfolio";
+---
+
+<section id="projects" class="reveal scroll-mt-24">
+  <SectionHeader index="03" title="projects" meta={`[ ${projects.length} entries ]`} />
+  <ProjectFilter client:visible projects={projects} />
+</section>

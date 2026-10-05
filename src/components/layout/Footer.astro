@@ -1,0 +1,32 @@
+---
+import { personal_information } from "../../lib/portfolio";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-24 border-t border-zinc-800/60">
+  <div class="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-12 sm:flex-row sm:items-center sm:justify-between">
+    <div class="flex flex-col gap-1">
+      <p class="font-mono text-xs text-zinc-400">
+        © {year} {personal_information.name}
+      </p>
+      <p class="font-mono text-[11px] text-zinc-400">
+        <span class="text-matcha-300">▲</span> deployed on Cloudflare · built with Astro
+      </p>
+    </div>
+    <div class="flex flex-wrap items-center gap-4 font-mono text-[11px]">
+      <a href={`mailto:${personal_information.email}`} class="text-zinc-400 transition-colors hover:text-matcha-300">
+        email
+      </a>
+      <a
+        href={personal_information.linkedin}
+        target="_blank"
+        rel="noreferrer"
+        class="text-zinc-400 transition-colors hover:text-matcha-300"
+      >
+        linkedin
+      </a>
+      <a href="/rss.xml" class="text-zinc-400 transition-colors hover:text-matcha-300">rss</a>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,19 @@
+---
+interface Props {
+  index: string;
+  title: string;
+  meta?: string;
+}
+
+const { index, title, meta } = Astro.props;
+---
+
+<div class="mb-8 flex items-end justify-between gap-4 border-b border-zinc-800/80 pb-4">
+  <div class="flex items-baseline gap-3">
+    <span class="font-mono text-[11px] text-matcha-300">{index}</span>
+    <h2 class="font-display text-xl font-semibold tracking-tight text-zinc-100">
+      <span class="font-mono text-base text-matcha-300/70">~/</span>{title}
+    </h2>
+  </div>
+  {meta && <span class="hidden font-mono text-[11px] text-zinc-400 sm:block">{meta}</span>}
+</div>

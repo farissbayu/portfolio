@@ -1,0 +1,109 @@
+---
+const links = [
+  { id: "about", label: "about" },
+  { id: "work", label: "work" },
+  { id: "projects", label: "projects" },
+  { id: "articles", label: "articles" },
+  { id: "contact", label: "contact" },
+];
+---
+
+<header class="fixed inset-x-0 top-0 z-50 border-b border-zinc-800/60 bg-zinc-950/80 backdrop-blur-md">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5" aria-label="Primary">
+    <a href="/" class="group flex items-baseline gap-1 font-mono text-sm text-zinc-100">
+      <span class="font-semibold">FB</span><span class="text-matcha-300 group-hover:text-matcha-400">.</span>
+    </a>
+
+    <ul class="hidden items-center gap-6 md:flex">
+      {
+        links.map((link, i) => (
+          <li>
+            <a
+              href={`/#${link.id}`}
+              data-nav
+              data-section={link.id}
+              class="font-mono text-[11px] uppercase tracking-[0.18em] text-zinc-400 transition-colors hover:text-matcha-300"
+            >
+              <span class="text-zinc-500">[{String(i + 1).padStart(2, "0")}/]</span>{link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <button
+      id="menu-toggle"
+      type="button"
+      class="rounded-md border border-zinc-800 p-2 text-zinc-400 transition-colors hover:border-matcha-700 hover:text-matcha-300 md:hidden"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span class="block h-px w-5 bg-current"></span>
+      <span class="mt-1.5 block h-px w-5 bg-current"></span>
+    </button>
+  </nav>
+
+  <div id="mobile-menu" hidden class="border-t border-zinc-800/60 bg-zinc-950/95 px-6 py-4 md:hidden">
+    <ul class="flex flex-col gap-4">
+      {
+        links.map((link, i) => (
+          <li>
+            <a
+              href={`/#${link.id}`}
+              data-nav
+              data-section={link.id}
+              class="font-mono text-xs uppercase tracking-[0.18em] text-zinc-400 transition-colors hover:text-matcha-300"
+            >
+              <span class="text-zinc-500">[{String(i + 1).padStart(2, "0")}/]</span>{link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</header>
+
+<div id="scroll-progress" class="fixed inset-x-0 top-0 z-[60] h-px bg-matcha-500"></div>
+
+<script>
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+  toggle?.addEventListener("click", () => {
+    const expanded = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!expanded));
+    if (menu) menu.hidden = expanded;
+  });
+
+  menu?.querySelectorAll("a").forEach((a) =>
+    a.addEventListener("click", () => {
+      if (menu) menu.hidden = true;
+      toggle?.setAttribute("aria-expanded", "false");
+    })
+  );
+
+  const progress = document.getElementById("scroll-progress");
+  const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-nav]"));
+  const sections = navLinks
+    .map((l) => document.getElementById(l.dataset.section || ""))
+    .filter((el): el is HTMLElement => Boolean(el));
+
+  const onScroll = () => {
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - doc.clientHeight;
+    if (progress) progress.style.width = `${max > 0 ? (doc.scrollTop / max) * 100 : 0}%`;
+
+    let current = "";
+    for (const section of sections) {
+      if (section.getBoundingClientRect().top <= 120) current = section.id;
+    }
+    navLinks.forEach((link) => {
+      const active = link.dataset.section === current;
+      link.setAttribute("aria-current", active ? "true" : "false");
+      link.classList.toggle("text-matcha-300", active);
+    });
+  };
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+</script>

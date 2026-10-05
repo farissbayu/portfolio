@@ -1,0 +1,3 @@
+# Local Cloudflare secrets for `wrangler dev` / local API testing.
+# Copy to `.dev.vars` (gitignored) and fill in real values.
+# RESEND_API_KEY="re_xxxxxxxx"
