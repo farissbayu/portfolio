@@ -24,10 +24,10 @@ export function example(input: string): string {
 ## Images
 
 Store images in `src/content/attachments/` and reference them relative to this
-file. URL-encode spaces as `%20`. Replace the path below with your own image —
-Astro fails the build if the referenced file does not exist.
+file. URL-encode spaces as `%20`. Astro fails the build if the referenced file
+does not exist, so only add the line below once the image is committed.
 
-![Alt text describing the image](./../attachments/Screenshot%202026-10-05%20120206.png)
+<!-- ![Alt text describing the image](./../attachments/your-image.png) -->
 
 ## Tables and lists
 
