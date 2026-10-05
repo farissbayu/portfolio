@@ -52,7 +52,7 @@ export interface Skills {
   backend: string[];
   database: string[];
   ai_and_llm: string[];
-  devops_and_infrastructure: string[];
+  infrastructure: string[];
 }
 
 export interface Portfolio {

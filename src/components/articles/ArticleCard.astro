@@ -13,21 +13,21 @@ const minutes = entry.body ? readingTime(entry.body) : 1;
 
 <a
   href={`/articles/${entry.id}/`}
-  class="tech-card group flex flex-col rounded-xl border border-zinc-800/80 bg-zinc-900/30 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-matcha-600/50"
+  class="tech-card group flex flex-col rounded-xl border border-hairline/80 surface-raised p-6 transition-all duration-300 hover:-translate-y-0.5 hover:accent-border-strong"
 >
   <div class="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-matcha-500/70 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
 
-  <div class="flex items-center justify-between font-mono text-[11px] text-zinc-400">
+  <div class="flex items-center justify-between font-mono text-[11px] text-body">
     <span>{formatDate(publishedDate)}</span>
     <span>{minutes} min read</span>
   </div>
 
-  <h3 class="mt-4 font-display text-base font-semibold tracking-tight text-zinc-100 transition-colors group-hover:text-matcha-300">
+  <h3 class="mt-4 font-display text-base font-semibold tracking-tight text-strong transition-colors group-hover:text-accent">
     {title}
   </h3>
-  <p class="mt-2 flex-1 text-sm font-light leading-relaxed text-zinc-400">{description}</p>
+  <p class="mt-2 flex-1 text-sm font-light leading-relaxed text-body">{description}</p>
 
   <div class="mt-5 flex flex-wrap gap-2">
-    {tags.map((tag) => <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-matcha-300">#{tag}</span>)}
+    {tags.map((tag) => <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-accent">#{tag}</span>)}
   </div>
 </a>

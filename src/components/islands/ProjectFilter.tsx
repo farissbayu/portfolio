@@ -1,20 +1,17 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import type { Project } from "../../types/portfolio";
+import { isHighlightTech } from "../../lib/utils";
 
 interface Props {
   projects: Project[];
 }
 
-const HIGHLIGHT = new Set(["AI/LLM", "GitLab"]);
-
 export default function ProjectFilter({ projects }: Props) {
   const [active, setActive] = useState<string | null>(null);
 
-  const tags = useMemo(() => {
-    const set = new Set<string>();
-    projects.forEach((project) => project.technologies.forEach((tech) => set.add(tech)));
-    return Array.from(set).sort();
-  }, [projects]);
+  const tags = Array.from(
+    new Set(projects.flatMap((project) => project.technologies)),
+  ).sort();
 
   const visible = active
     ? projects.filter((project) => project.technologies.includes(active))
@@ -28,8 +25,8 @@ export default function ProjectFilter({ projects }: Props) {
           onClick={() => setActive(null)}
           className={`rounded-md border px-2.5 py-1 font-mono text-[11px] transition-colors ${
             active === null
-              ? "border-matcha-600 bg-matcha-950/40 text-matcha-200"
-              : "border-zinc-800 bg-zinc-900/40 text-zinc-400 hover:border-matcha-700 hover:text-matcha-300"
+              ? "accent-border-strong accent-surface text-accent-strong"
+              : "border-hairline surface-raised text-body hover:accent-border-strong hover:text-accent"
           }`}
         >
           all
@@ -41,8 +38,8 @@ export default function ProjectFilter({ projects }: Props) {
             onClick={() => setActive(tag === active ? null : tag)}
             className={`rounded-md border px-2.5 py-1 font-mono text-[11px] transition-colors ${
               active === tag
-                ? "border-matcha-600 bg-matcha-950/40 text-matcha-200"
-                : "border-zinc-800 bg-zinc-900/40 text-zinc-400 hover:border-matcha-700 hover:text-matcha-300"
+                ? "accent-border-strong accent-surface text-accent-strong"
+                : "border-hairline surface-raised text-body hover:accent-border-strong hover:text-accent"
             }`}
           >
             {tag}
@@ -54,32 +51,33 @@ export default function ProjectFilter({ projects }: Props) {
         {visible.map((project, i) => (
           <article
             key={project.name}
-            className="tech-card group flex flex-col rounded-xl border border-zinc-800/80 bg-zinc-950/60 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-matcha-600/50"
+            style={{ animationDelay: `${Math.min(i, 7) * 60}ms` }}
+            className="tech-card card-in group flex flex-col rounded-xl border border-hairline surface-sunken p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:accent-border-strong"
           >
             <div className="flex items-center justify-between">
-              <span className="font-mono text-[11px] text-matcha-300">
+              <span className="font-mono text-[11px] text-accent">
                 P.{String(i + 1).padStart(2, "0")}
               </span>
-              <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400">
+              <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-body">
                 {project.role}
               </span>
             </div>
 
-            <h3 className="mt-4 font-display text-lg font-semibold tracking-tight text-zinc-100">
+            <h3 className="mt-4 font-display text-lg font-semibold tracking-tight text-strong">
               {project.name}
             </h3>
-            <p className="mt-2 text-sm font-light leading-relaxed text-zinc-400">
+            <p className="mt-2 text-sm font-light leading-relaxed text-body">
               {project.description}
             </p>
 
-            <div className="mt-6 flex flex-wrap gap-2 border-t border-zinc-800/60 pt-5">
+            <div className="mt-6 flex flex-wrap gap-2 border-t border-hairline pt-5">
               {project.technologies.map((tech) => (
                 <span
                   key={tech}
                   className={`rounded border px-2 py-0.5 font-mono text-[11px] ${
-                    HIGHLIGHT.has(tech)
-                      ? "border-matcha-800/60 bg-matcha-950/40 text-matcha-300"
-                      : "border-zinc-800 bg-zinc-900/40 text-zinc-400"
+                    isHighlightTech(tech)
+                      ? "accent-border accent-surface text-accent"
+                      : "border-hairline surface-raised text-body"
                   }`}
                 >
                   {tech}

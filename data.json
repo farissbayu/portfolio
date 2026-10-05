@@ -135,16 +135,6 @@
       "gpa": "3.73/4.00"
     },
     {
-      "institution": "Bangkit Academy led by Google, Tokopedia, Gojek, & Traveloka",
-      "location": "Online",
-      "program": "Mobile Development Cohort",
-      "period": "Feb 2023 - Jul 2023",
-      "details": [
-        "Selected as one of 5,010 students from 67,387 applicants across Indonesia.",
-        "Achieved Top 65 Capstone Project."
-      ]
-    },
-    {
       "institution": "Devscale Indonesia",
       "location": "Online",
       "program": "AI Enabled Python Web Development Cohort",
@@ -163,6 +153,16 @@
       "details": [
         "Completed an intensive fullstack development bootcamp with Next.js technology.",
         "Built fullstack websites from scratch including file storage, OAuth, and LLM integration."
+      ]
+    },
+    {
+      "institution": "Bangkit Academy led by Google, Tokopedia, Gojek, & Traveloka",
+      "location": "Online",
+      "program": "Mobile Development Cohort",
+      "period": "Feb 2023 - Jul 2023",
+      "details": [
+        "Selected as one of 5,010 students from 67,387 applicants across Indonesia.",
+        "Achieved Top 65 Capstone Project."
       ]
     }
   ],
@@ -191,7 +191,7 @@
       "MCP",
       "Agentic Workflows"
     ],
-    "devops_and_infrastructure": [
+    "infrastructure": [
       "Linux",
       "Nginx",
       "Cloudflare",

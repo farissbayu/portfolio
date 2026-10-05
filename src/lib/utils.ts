@@ -12,6 +12,8 @@ export function readingTime(body: string): number {
   return Math.max(1, Math.round(words / 200));
 }
 
-export function cn(...classes: Array<string | false | null | undefined>): string {
-  return classes.filter(Boolean).join(" ");
+const HIGHLIGHT_TECHS = new Set(["AI/LLM", "GitLab"]);
+
+export function isHighlightTech(tech: string): boolean {
+  return HIGHLIGHT_TECHS.has(tech);
 }

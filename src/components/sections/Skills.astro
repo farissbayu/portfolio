@@ -7,26 +7,26 @@ const categories = [
   { key: "backend", label: "backend", span: "md:col-span-3", accent: false },
   { key: "ai_and_llm", label: "ai_and_llm", span: "md:col-span-4", accent: true },
   { key: "database", label: "database", span: "md:col-span-2", accent: false },
-  { key: "devops_and_infrastructure", label: "devops_&_cloudflare", span: "md:col-span-6", accent: true },
+  { key: "infrastructure", label: "infrastructure", span: "md:col-span-6", accent: true },
 ] as const;
 ---
 
 <section id="skills" class="reveal scroll-mt-24">
   <SectionHeader index="05" title="skills" meta="[ arsenal ]" />
 
-  <div class="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-zinc-800/80 bg-zinc-800/60 md:grid-cols-6">
+  <div class="stagger reveal grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-hairline/80 surface-raised/60 md:grid-cols-6">
     {
       categories.map((category) => {
         const items = skills[category.key];
         return (
           <div
             class:list={[
-              "bg-zinc-950/80 p-6 transition-colors hover:bg-zinc-900/60",
+              "surface-sunken p-6 transition-colors hover:surface-raised",
               category.span,
             ]}
           >
-            <p class="font-mono text-[11px] text-matcha-300">
-              <span class="text-matcha-300/60">~/</span>
+            <p class="font-mono text-[11px] text-accent">
+              <span class="text-accent-deep">~/</span>
               {category.label}
             </p>
             <div class="mt-4 flex flex-wrap gap-2">
@@ -35,8 +35,8 @@ const categories = [
                   class:list={[
                     "rounded-md border px-2.5 py-1 font-mono text-[11px] transition-colors",
                     category.accent
-                      ? "border-matcha-800/60 bg-matcha-950/30 text-matcha-300 hover:border-matcha-600"
-                      : "border-zinc-800 bg-zinc-900/40 text-zinc-400 hover:border-matcha-700 hover:text-matcha-300",
+                      ? "accent-border accent-surface text-accent hover:accent-border-strong"
+                      : "border-hairline surface-raised text-body hover:accent-border-strong hover:text-accent",
                   ]}
                 >
                   {item}

@@ -7,34 +7,34 @@ import { education, certifications, achievements } from "../../lib/portfolio";
 <section id="education" class="reveal scroll-mt-24">
   <SectionHeader index="06" title="education_&_awards" meta="[ credentials ]" />
 
-  <div class="grid grid-cols-1 gap-6 lg:grid-cols-[1.5fr_1fr]">
+  <div class="stagger reveal grid grid-cols-1 gap-6 lg:grid-cols-[1.5fr_1fr]">
     <div class="space-y-4">
       {
         education.map((entry, i) => (
-          <article class="rounded-xl border border-zinc-800/80 bg-zinc-900/30 p-6 transition-colors hover:border-matcha-800/60">
+          <article class="rounded-xl border border-hairline/80 surface-raised p-6 transition-colors hover:accent-border">
             <div class="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
               <div>
-                <span class="font-mono text-[11px] text-matcha-300">
+                <span class="font-mono text-[11px] text-accent">
                   0x{String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 class="mt-1 font-display text-base font-semibold tracking-tight text-zinc-100">
+                <h3 class="mt-1 font-display text-base font-semibold tracking-tight text-strong">
                   {entry.institution}
                 </h3>
-                <p class="mt-0.5 text-sm text-zinc-400">
+                <p class="mt-0.5 text-sm text-body">
                   {entry.degree ?? entry.program}
                 </p>
               </div>
               <div class="text-left sm:text-right">
-                <p class="font-mono text-[11px] text-zinc-400">{entry.period}</p>
-                {entry.gpa && <p class="font-mono text-[11px] text-matcha-400">GPA {entry.gpa}</p>}
+                <p class="font-mono text-[11px] text-body">{entry.period}</p>
+                {entry.gpa && <p class="font-mono text-[11px] text-accent-deep">GPA {entry.gpa}</p>}
               </div>
             </div>
             {
               entry.details && (
                 <ul class="mt-4 space-y-2">
                   {entry.details.map((detail) => (
-                    <li class="flex gap-3 text-[13px] leading-relaxed text-zinc-400">
-                      <span class="mt-0.5 font-mono text-matcha-300">&gt;</span>
+                    <li class="flex gap-3 text-[13px] leading-relaxed text-body">
+                      <span class="mt-0.5 font-mono text-accent">&gt;</span>
                       <span>{detail}</span>
                     </li>
                   ))}
@@ -47,32 +47,32 @@ import { education, certifications, achievements } from "../../lib/portfolio";
     </div>
 
     <div class="space-y-6">
-      <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/30 p-6">
-        <p class="font-mono text-[11px] text-matcha-300"><span class="text-matcha-300/60">~/</span>certifications</p>
+      <div class="rounded-xl border border-hairline/80 surface-raised p-6">
+        <p class="font-mono text-[11px] text-accent"><span class="text-accent-deep">~/</span>certifications</p>
         <ul class="mt-4 space-y-4">
           {
             certifications.map((cert) => (
-              <li class="flex items-start justify-between gap-4 border-b border-zinc-800/60 pb-3 last:border-0 last:pb-0">
+              <li class="flex items-start justify-between gap-4 border-b border-hairline/60 pb-3 last:border-0 last:pb-0">
                 <div>
-                  <p class="text-sm text-zinc-300">{cert.name}</p>
-                  <p class="font-mono text-[11px] text-zinc-400">{cert.issuer}</p>
+                  <p class="text-sm text-body">{cert.name}</p>
+                  <p class="font-mono text-[11px] text-body">{cert.issuer}</p>
                 </div>
-                <span class="font-mono text-[11px] text-zinc-400">{cert.year}</span>
+                <span class="font-mono text-[11px] text-body">{cert.year}</span>
               </li>
             ))
           }
         </ul>
       </div>
 
-      <div class="rounded-xl border border-zinc-800/80 bg-zinc-900/30 p-6">
-        <p class="font-mono text-[11px] text-matcha-300"><span class="text-matcha-300/60">~/</span>achievements</p>
+      <div class="rounded-xl border border-hairline/80 surface-raised p-6">
+        <p class="font-mono text-[11px] text-accent"><span class="text-accent-deep">~/</span>achievements</p>
         <ul class="mt-4 space-y-4">
           {
             achievements.map((item) => (
-              <li class="border-b border-zinc-800/60 pb-3 last:border-0 last:pb-0">
+              <li class="border-b border-hairline/60 pb-3 last:border-0 last:pb-0">
                 <div class="flex items-start justify-between gap-4">
-                  <p class="text-sm text-zinc-300">{item.title}</p>
-                  <span class="font-mono text-[11px] text-zinc-400">{item.year}</span>
+                  <p class="text-sm text-body">{item.title}</p>
+                  <span class="font-mono text-[11px] text-body">{item.year}</span>
                 </div>
                 <div class="mt-2 flex gap-2">
                   <Badge label={item.role} />

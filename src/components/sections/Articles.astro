@@ -12,7 +12,7 @@ const articles = (await getCollection("articles", ({ data }) => !data.draft))
   articles.length > 0 && (
     <section id="articles" class="reveal scroll-mt-24">
       <SectionHeader index="04" title="articles" meta={`[ ${articles.length} recent ]`} />
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div class="stagger reveal grid grid-cols-1 gap-6 md:grid-cols-3">
         {articles.map((entry) => (
           <ArticleCard entry={entry} />
         ))}
@@ -20,9 +20,9 @@ const articles = (await getCollection("articles", ({ data }) => !data.draft))
       <div class="mt-8">
         <a
           href="/articles/"
-          class="font-mono text-[11px] text-zinc-400 transition-colors hover:text-matcha-300"
+          class="font-mono text-[11px] text-body transition-colors hover:text-accent"
         >
-          $ ls ./articles <span class="text-matcha-300">→</span>
+          $ ls ./articles <span class="text-accent">→</span>
         </a>
       </div>
     </section>

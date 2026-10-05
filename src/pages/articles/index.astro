@@ -13,11 +13,11 @@ const articles = (await getCollection("articles", ({ data }) => !data.draft)).so
   description="Notes on fullstack engineering, AI/LLM integration, and building practical software."
 >
   <section class="pt-4">
-    <p class="font-mono text-[11px] text-matcha-300">$ ls ./articles</p>
-    <h1 class="mt-4 font-display text-3xl font-bold tracking-tight text-white sm:text-5xl">
+    <p class="font-mono text-[11px] text-accent">$ ls ./articles</p>
+    <h1 class="mt-4 font-display text-3xl font-bold tracking-tight text-strong sm:text-5xl">
       Articles
     </h1>
-    <p class="mt-4 max-w-2xl text-base font-light leading-relaxed text-zinc-400">
+    <p class="mt-4 max-w-2xl text-base font-light leading-relaxed text-body">
       Notes on fullstack engineering, AI/LLM integration, and building practical software.
     </p>
 
@@ -27,7 +27,7 @@ const articles = (await getCollection("articles", ({ data }) => !data.draft)).so
 
     {
       articles.length === 0 && (
-        <p class="mt-12 font-mono text-xs text-zinc-400">No articles published yet.</p>
+        <p class="mt-12 font-mono text-xs text-body">No articles published yet.</p>
       )
     }
   </section>

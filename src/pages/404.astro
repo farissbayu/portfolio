@@ -4,16 +4,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <BaseLayout title="404 — Not Found" description="The requested page could not be found.">
   <section class="flex min-h-[60vh] flex-col items-start justify-center">
-    <p class="font-mono text-[11px] text-matcha-300">$ cd /requested_path</p>
-    <h1 class="mt-4 font-display text-5xl font-bold tracking-tight text-white sm:text-7xl">
+    <p class="font-mono text-[11px] text-accent">$ cd /requested_path</p>
+    <h1 class="mt-4 font-display text-5xl font-bold tracking-tight text-strong sm:text-7xl">
       404
     </h1>
-    <p class="mt-4 font-mono text-xs text-zinc-400">
-      bash: path not found<span class="cursor-blink text-matcha-300">▋</span>
+    <p class="mt-4 font-mono text-xs text-body">
+      bash: path not found<span class="cursor-blink text-accent">▋</span>
     </p>
     <a
       href="/"
-      class="mt-8 rounded-md border border-zinc-800 bg-zinc-900/40 px-4 py-2 font-mono text-[11px] text-zinc-400 transition-all duration-200 hover:-translate-y-0.5 hover:border-matcha-700 hover:text-matcha-300"
+      class="mt-8 rounded-md border border-hairline surface-raised px-4 py-2 font-mono text-[11px] text-body transition-all duration-200 hover:-translate-y-0.5 hover:accent-border-strong hover:text-accent"
     >
       $ cd ~
     </a>

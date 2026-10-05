@@ -45,6 +45,17 @@ const ogImage = new URL(image, Astro.site);
 
     <script is:inline>
       document.documentElement.classList.add("js");
+      (() => {
+        try {
+          const stored = localStorage.getItem("theme");
+          const theme =
+            stored ??
+            (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+          document.documentElement.dataset.theme = theme;
+        } catch {
+          document.documentElement.dataset.theme = "dark";
+        }
+      })();
     </script>
   </head>
   <body class="relative min-h-screen overflow-x-hidden">

@@ -9,10 +9,10 @@ const { label, accent = false } = Astro.props;
 
 <span
   class:list={[
-    "inline-flex items-center rounded border px-2 py-0.5 font-mono text-[11px] transition-colors",
+    "pill-hover inline-flex items-center rounded border px-2 py-0.5 font-mono text-[11px]",
     accent
-      ? "border-matcha-800/60 bg-matcha-950/40 text-matcha-300 hover:border-matcha-600 hover:text-matcha-200"
-      : "border-zinc-800 bg-zinc-900/40 text-zinc-400 hover:border-matcha-700 hover:text-matcha-300",
+      ? "accent-border accent-surface text-accent hover:accent-border-strong hover:text-accent-strong"
+      : "border-hairline surface-raised text-body hover:accent-border-strong hover:text-accent",
   ]}
 >
   {label}

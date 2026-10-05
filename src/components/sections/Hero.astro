@@ -18,24 +18,24 @@ const links = [
 
   <div class="mt-8 grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.4fr_1fr]">
     <div>
-      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-matcha-300">
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
         $ whoami
       </p>
-      <h1 class="mt-4 font-display text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
+      <h1 class="shimmer mt-4 font-display text-4xl font-bold leading-[1.05] tracking-tight text-strong sm:text-6xl lg:text-7xl">
         {personal_information.name}
       </h1>
 
       <div class="mt-5 flex flex-wrap gap-2">
         {
           roles.map((role) => (
-            <span class="rounded border border-zinc-800 bg-zinc-900/40 px-2.5 py-1 font-mono text-[11px] text-zinc-400">
+            <span class="rounded border border-hairline surface-raised px-2.5 py-1 font-mono text-[11px] text-body">
               {role}
             </span>
           ))
         }
       </div>
 
-      <p class="mt-7 max-w-2xl text-base font-light leading-relaxed text-zinc-400 sm:text-lg">
+      <p class="mt-7 max-w-2xl text-base font-light leading-relaxed text-body sm:text-lg">
         {profile}
       </p>
 
@@ -46,7 +46,7 @@ const links = [
               href={link.href}
               target={link.href.startsWith("http") ? "_blank" : undefined}
               rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-              class="rounded-md border border-zinc-800 bg-zinc-900/40 px-3.5 py-2 font-mono text-[11px] text-zinc-400 transition-all duration-200 hover:-translate-y-0.5 hover:border-matcha-700 hover:text-matcha-300"
+              class="rounded-md border border-hairline surface-raised px-3.5 py-2 font-mono text-[11px] text-body transition-all duration-200 hover:-translate-y-0.5 hover:accent-border-strong hover:text-accent"
             >
               {link.label}
             </a>
@@ -56,12 +56,12 @@ const links = [
     </div>
 
     <div class="relative">
-      <div class="tech-card scanlines overflow-hidden rounded-xl border border-zinc-800/80 bg-zinc-900/40">
-        <div class="flex items-center gap-2 border-b border-zinc-800/80 px-4 py-2.5">
-          <span class="h-2.5 w-2.5 rounded-full bg-zinc-700"></span>
-          <span class="h-2.5 w-2.5 rounded-full bg-zinc-700"></span>
-          <span class="h-2.5 w-2.5 rounded-full bg-matcha-600"></span>
-          <span class="ml-2 font-mono text-[10px] text-zinc-400">~/profile.jpeg</span>
+      <div class="tech-card scanlines float-slow overflow-hidden rounded-xl border border-hairline/80 surface-raised">
+        <div class="flex items-center gap-2 border-b border-hairline/80 px-4 py-2.5">
+          <span class="h-2.5 w-2.5 rounded-full surface-raised"></span>
+          <span class="h-2.5 w-2.5 rounded-full surface-raised"></span>
+          <span class="h-2.5 w-2.5 rounded-full accent-solid"></span>
+          <span class="ml-2 font-mono text-[10px] text-body">~/profile.jpeg</span>
         </div>
         <div class="relative">
           <Image
@@ -74,8 +74,8 @@ const links = [
           />
           <span class="scanline"></span>
         </div>
-        <div class="flex items-center justify-between border-t border-zinc-800/80 px-4 py-2">
-          <span class="font-mono text-[10px] text-zinc-400">{personal_information.location}</span>
+        <div class="flex items-center justify-between border-t border-hairline/80 px-4 py-2">
+          <span class="font-mono text-[10px] text-body">{personal_information.location}</span>
           <span class="font-mono text-[10px] text-signal-500">● online</span>
         </div>
       </div>
