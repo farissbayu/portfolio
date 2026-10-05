@@ -5,7 +5,7 @@ import mdx from "@astrojs/mdx";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  site: "https://farisbayu.dev",
+  site: "https://farissbay.my.id",
   output: "static",
   adapter: cloudflare({
     imageService: "compile",
