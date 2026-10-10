@@ -1,12 +1,12 @@
 {
   "personal_information": {
     "name": "Faris Bayu Setyawan",
-    "location": "Malang, 65152",
+    "location": "Malang",
     "phone": "+62 822 3226 5913",
     "email": "bayustfa@gmail.com",
     "linkedin": "https://www.linkedin.com/in/faris-bayu-setyawan-42366a205/"
   },
-  "profile": "Fullstack Web Developer with hands-on experience building scalable web applications and digital solutions across public-sector and private-sector projects. Experienced in developing both frontend and backend systems using React, TypeScript, Laravel, and PHP, with a strong foundation in database design, UI/UX, and system integration. Also experienced in AI/LLM integration, including RAG, AI agents, automated reporting, and API development with Python and FastAPI. Focused on building practical, maintainable, and user-oriented solutions from requirements gathering through deployment.",
+  "profile": "Product Engineer with end-to-end experience building scalable digital solutions for public and private sectors. Skilled in turning requirements into user-centric products using React, TypeScript, Laravel, and Python (FastAPI). Experienced in system integration, database design, and embedding modern AI/LLM capabilities—such as RAG, AI agents, and automated workflows—from concept to deployment.",
   "work_experience": [
     {
       "company": "Dinas Komunikasi dan Informatika Kabupaten Pasuruan",
@@ -16,8 +16,7 @@
       "responsibilities": [
         "Developed a web-based job analysis application to support internal HR data management and efficiency.",
         "Developed SGS Pendidikan, a grant management platform for schools under the Pasuruan Regency Education Office, covering school data management, grant applications, verification, and reporting/SPJ workflows.",
-        "Developed project management features for the TIK Asset Management System, enabling developers to track tasks and projects with direct integration to a self-hosted GitLab instance.",
-        "Implemented AI-assisted automated reporting to generate monthly project reports based on developers' completed tasks and activities.",
+        "Developed end-to-end TIK Asset Management features, including developer task/project tracking integrated with self-hosted GitLab, AI-assisted automated monthly reporting based on completed activities, and custom MCP tool integration to streamline project management via AI agent coding tools.",
         "Collaborated with internal teams and other service organizations to gather requirements, design database structures, and implement scalable web solutions."
       ],
       "technologies": [
