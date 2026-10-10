@@ -109,6 +109,17 @@
         "Integrated the frontend application with backend services for data handling."
       ],
       "technologies": ["TypeScript", "Angular"]
+    },
+    {
+      "name": "Personal Dev Log",
+      "role": "Frontend Developer",
+      "description": "A web app for capturing brag-worthy wins and lessons in STAR format, organized by workspace with Markdown notes.",
+      "responsibilities": [
+        "Developed the responsive single-page application in React and TypeScript.",
+        "Implemented STAR-format entry capture and workspace-based organization.",
+        "Built Markdown note editing and rendering with client-side persistence."
+      ],
+      "technologies": ["TypeScript", "React", "Tailwind CSS", "Vite", "Markdown"]
     }
   ],
   "achievements": [
