@@ -78,7 +78,8 @@
       "responsibilities": [
         "Developed project and task management features for developers.",
         "Integrated the system with a self-hosted GitLab instance.",
-        "Implemented AI-assisted automated reporting to generate monthly project reports from completed tasks and activities."
+        "Implemented AI-assisted automated reporting to generate monthly project reports from completed tasks and activities.",
+        "Built a custom MCP tool integration to streamline project management via AI agent coding tools."
       ],
       "technologies": [
         "PHP",
@@ -114,6 +115,7 @@
       "name": "Personal Dev Log",
       "role": "Frontend Developer",
       "description": "A web app for capturing brag-worthy wins and lessons in STAR format, organized by workspace with Markdown notes.",
+      "link": "https://pdevlog.farissbay.my.id/",
       "responsibilities": [
         "Developed the responsive single-page application in React and TypeScript.",
         "Implemented STAR-format entry capture and workspace-based organization.",

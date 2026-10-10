@@ -64,7 +64,19 @@ export default function ProjectFilter({ projects }: Props) {
             </div>
 
             <h3 className="mt-4 font-display text-lg font-semibold tracking-tight text-strong">
-              {project.name}
+              {project.link ? (
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 transition-colors hover:text-accent"
+                >
+                  {project.name}
+                  <span className="font-mono text-xs text-accent">↗</span>
+                </a>
+              ) : (
+                project.name
+              )}
             </h3>
             <p className="mt-2 text-sm font-light leading-relaxed text-body">
               {project.description}

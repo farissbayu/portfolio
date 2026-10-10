@@ -28,6 +28,7 @@ export interface Project {
   description: string;
   responsibilities: string[];
   technologies: string[];
+  link?: string;
 }
 
 export interface Achievement {
