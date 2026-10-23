@@ -11,13 +11,12 @@
     {
       "company": "Dinas Komunikasi dan Informatika Kabupaten Pasuruan",
       "position": "Fullstack Developer",
-      "period": "Aug 2025 - Now",
+      "period": "Aug 2025 – Present",
       "location": "Pasuruan, Indonesia",
       "responsibilities": [
-        "Developed a web-based job analysis application to support internal HR data management and efficiency.",
-        "Developed SGS Pendidikan, a grant management platform for schools under the Pasuruan Regency Education Office, covering school data management, grant applications, verification, and reporting/SPJ workflows.",
-        "Developed end-to-end TIK Asset Management features, including developer task/project tracking integrated with self-hosted GitLab, AI-assisted automated monthly reporting based on completed activities, and custom MCP tool integration to streamline project management via AI agent coding tools.",
-        "Collaborated with internal teams and other service organizations to gather requirements, design database structures, and implement scalable web solutions."
+        "Digitized the HR job-analysis workflow, replacing manual records with a web application.",
+        "Shipped SGS Pendidikan for the Pasuruan Regency Education Office, digitizing school data, grant applications, verification, and SPJ reporting.",
+        "Built TIK Asset Management with GitLab integration and AI-generated monthly reports, plus a custom MCP tool for AI coding workflows."
       ],
       "technologies": [
         "PHP",
@@ -32,12 +31,12 @@
     {
       "company": "PT Tetanggaku Saling Bantu",
       "position": "Software Engineer Intern",
-      "period": "Oct 2023 - Nov 2023",
+      "period": "Oct 2023 – Nov 2023",
       "location": "Kota Jakarta Selatan, Indonesia",
       "responsibilities": [
-        "Developed a backend API for fraud detection, which was later integrated as a foundation for fraud prevention features in chat systems.",
-        "Built a machine learning model to identify potential fraudulent activity based on user input data.",
-        "Conducted manual QA testing for the Tetanggaku mobile application to ensure reliability and user experience quality."
+        "Built a backend fraud-detection API that became the foundation of the chat system's fraud prevention.",
+        "Trained a machine-learning model to flag potentially fraudulent user activity from input data.",
+        "Ran manual QA on the Tetanggaku mobile app, finding and resolving pre-release issues."
       ],
       "technologies": ["Java", "Python"]
     }
@@ -92,26 +91,6 @@
       ]
     },
     {
-      "name": "Job Analysis Application",
-      "role": "Fullstack Developer",
-      "description": "A web-based application developed to support internal HR data management and improve job analysis processes.",
-      "responsibilities": [
-        "Developed web-based features for job analysis.",
-        "Supported internal HR data management and operational efficiency."
-      ],
-      "technologies": ["PHP", "TypeScript", "React", "Laravel", "MySQL"]
-    },
-    {
-      "name": "Besmart",
-      "role": "Frontend Developer",
-      "description": "A web and mobile application developed to support PT. Amerta Indah Otsuka's marketing team in recording employee activities.",
-      "responsibilities": [
-        "Developed the frontend web application for the admin dashboard.",
-        "Integrated the frontend application with backend services for data handling."
-      ],
-      "technologies": ["TypeScript", "Angular"]
-    },
-    {
       "name": "Personal Dev Log",
       "role": "Frontend Developer",
       "description": "A web app for capturing brag-worthy wins and lessons in STAR format, organized by workspace with Markdown notes.",
@@ -143,35 +122,35 @@
       "institution": "IPB University",
       "location": "Bogor, Indonesia",
       "degree": "Bachelor's Degree in Computer Science, Faculty of Mathematics and Natural Sciences",
-      "period": "Aug 2020 - Aug 2024",
+      "period": "Aug 2020 – Aug 2024",
       "gpa": "3.73/4.00"
     },
     {
       "institution": "Devscale Indonesia",
       "location": "Online",
-      "program": "AI Enabled Python Web Development Cohort",
-      "period": "Jan 2026 - Apr 2026",
-      "details": [
-        "Completed an intensive fullstack development bootcamp covering Python, FastAPI, database design, deployment, LLMs, RAG, and AI agent development.",
-        "Built AI-powered web applications integrating OpenAI SDK, function calling, streaming, RAG, embeddings, OCR, MCP, and agentic workflows.",
-        "Gained hands-on experience with Linux server deployment, Nginx, Cloudflare, authentication, SQLModel, Alembic, and modern frontend integration."
-      ]
-    },
-    {
-      "institution": "Devscale Indonesia",
-      "location": "Online",
-      "program": "Fullstack Development Cohort",
-      "period": "Jan 2025 - Mar 2025",
-      "details": [
-        "Completed an intensive fullstack development bootcamp with Next.js technology.",
-        "Built fullstack websites from scratch including file storage, OAuth, and LLM integration."
+      "period": "Jan 2025 – Apr 2026",
+      "cohorts": [
+        {
+          "program": "AI Enabled Python Web Development Cohort",
+          "period": "Jan 2026 – Apr 2026",
+          "details": [
+            "Intensive bootcamp covering FastAPI, database design, LLMs, RAG, AI agents, and Linux/Nginx deployment."
+          ]
+        },
+        {
+          "program": "Fullstack Development Cohort",
+          "period": "Jan 2025 – Mar 2025",
+          "details": [
+            "Intensive fullstack bootcamp with Next.js, building fullstack sites from scratch with file storage, OAuth, and LLM integration."
+          ]
+        }
       ]
     },
     {
       "institution": "Bangkit Academy led by Google, Tokopedia, Gojek, & Traveloka",
       "location": "Online",
       "program": "Mobile Development Cohort",
-      "period": "Feb 2023 - Jul 2023",
+      "period": "Feb 2023 – Jul 2023",
       "details": [
         "Selected as one of 5,010 students from 67,387 applicants across Indonesia.",
         "Achieved Top 65 Capstone Project."
@@ -180,8 +159,6 @@
   ],
   "skills": {
     "frontend": [
-      "HTML",
-      "CSS",
       "JavaScript",
       "TypeScript",
       "React JS",
@@ -196,10 +173,7 @@
       "RAG",
       "AI Agents",
       "OpenAI SDK",
-      "Function Calling",
-      "Streaming",
       "Embeddings",
-      "OCR",
       "MCP",
       "Agentic Workflows"
     ],

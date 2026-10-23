@@ -20,7 +20,7 @@ const articles = (await getCollection("articles", ({ data }) => !data.draft))
       <div class="mt-8">
         <a
           href="/articles/"
-          class="font-mono text-[11px] text-body transition-colors hover:text-accent"
+          class="inline-flex min-h-11 items-center font-mono text-[11px] text-body transition-colors hover:text-accent md:min-h-0"
         >
           $ ls ./articles <span class="text-accent">→</span>
         </a>

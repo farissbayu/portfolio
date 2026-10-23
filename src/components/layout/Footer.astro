@@ -10,14 +10,14 @@ const year = new Date().getFullYear();
       © {year} {personal_information.name}
     </p>
     <div class="flex flex-wrap items-center gap-4 font-mono text-[11px]">
-      <a href={`mailto:${personal_information.email}`} class="text-body transition-colors hover:text-accent">
+      <a href={`mailto:${personal_information.email}`} class="inline-flex min-h-11 min-w-11 items-center text-body transition-colors hover:text-accent md:min-h-0 md:min-w-0">
         email
       </a>
       <a
         href={personal_information.linkedin}
         target="_blank"
         rel="noreferrer"
-        class="text-body transition-colors hover:text-accent"
+        class="inline-flex min-h-11 items-center text-body transition-colors hover:text-accent md:min-h-0"
       >
         linkedin
       </a>

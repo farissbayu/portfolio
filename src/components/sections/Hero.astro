@@ -7,8 +7,8 @@ import { personal_information, profile } from "../../lib/portfolio";
 const roles = ["Fullstack Developer", "AI/LLM Integration", "React · Laravel · FastAPI"];
 
 const links = [
-  { label: "email", href: `mailto:${personal_information.email}` },
-  { label: "linkedin", href: personal_information.linkedin },
+  { label: "Email me", href: `mailto:${personal_information.email}`, primary: true },
+  { label: "LinkedIn", href: personal_information.linkedin, primary: false },
 ];
 ---
 
@@ -45,12 +45,18 @@ const links = [
               href={link.href}
               target={link.href.startsWith("http") ? "_blank" : undefined}
               rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-              class="rounded-md border border-hairline surface-raised px-3.5 py-2 font-mono text-[11px] text-body transition-all duration-200 hover:-translate-y-0.5 hover:accent-border-strong hover:text-accent"
+              class:list={[
+                "inline-flex min-h-11 items-center rounded-md px-4 py-2 font-mono text-[11px] transition-all duration-200 md:min-h-0",
+                link.primary
+                  ? "bg-matcha-700 font-medium text-white hover:bg-matcha-600"
+                  : "border border-hairline surface-raised text-body hover:-translate-y-0.5 hover:accent-border-strong hover:text-accent",
+              ]}
             >
               {link.label}
             </a>
           ))
         }
+        <span class="font-mono text-[11px] text-body">Based in {personal_information.location}</span>
       </div>
     </div>
 
@@ -73,9 +79,8 @@ const links = [
           />
           <span class="scanline"></span>
         </div>
-        <div class="flex items-center justify-between border-t border-hairline/80 px-4 py-2">
+        <div class="flex items-center border-t border-hairline/80 px-4 py-2">
           <span class="font-mono text-[10px] text-body">{personal_information.location}</span>
-          <span class="font-mono text-[10px] text-signal-500">● online</span>
         </div>
       </div>
     </div>

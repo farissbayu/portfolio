@@ -1,10 +1,16 @@
 ---
 import SectionHeader from "../common/SectionHeader.astro";
-import ProjectFilter from "../islands/ProjectFilter.tsx";
+import ProjectCard from "../projects/ProjectCard.astro";
 import { projects } from "../../lib/portfolio";
 ---
 
 <section id="projects" class="reveal scroll-mt-24">
   <SectionHeader index="03" title="projects" meta={`[ ${projects.length} entries ]`} />
-  <ProjectFilter client:visible projects={projects} />
+  <div class="stagger reveal grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+    {
+      projects.map((project, i) => (
+        <ProjectCard project={project} index={i} />
+      ))
+    }
+  </div>
 </section>

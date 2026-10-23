@@ -46,6 +46,7 @@ export interface Education {
   period: string;
   gpa?: string;
   details?: string[];
+  cohorts?: { program: string; period: string; details?: string[] }[];
 }
 
 export interface Skills {

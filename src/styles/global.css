@@ -173,6 +173,11 @@
     background: var(--selection-bg);
     color: var(--selection-fg);
   }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
 }
 
 /* Semantic surface/text utilities that flip with the theme. */
@@ -426,22 +431,6 @@
   transform: translateY(-1px);
 }
 
-/* Self-contained entrance for islands that mount after the page observer runs. */
-.card-in {
-  animation: card-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@keyframes card-in {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
 @media (prefers-reduced-motion: no-preference) {
   .float-slow {
     animation: drift 7s ease-in-out infinite;
@@ -534,7 +523,6 @@
   .scanline,
   .pulse-ring,
   .marquee-track,
-  .card-in,
   .float-slow,
   .animate-pulse {
     animation: none !important;

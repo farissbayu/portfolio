@@ -1,83 +1,117 @@
 ---
 import SectionHeader from "../common/SectionHeader.astro";
-import Badge from "../common/Badge.astro";
 import { education, certifications, achievements } from "../../lib/portfolio";
 ---
 
 <section id="education" class="reveal scroll-mt-24">
-  <SectionHeader index="06" title="education_&_awards" meta="[ credentials ]" />
+  <SectionHeader index="06" title="education_&_awards" meta="[ academic & credentials ]" />
 
-  <div class="stagger reveal grid grid-cols-1 gap-6 lg:grid-cols-[1.5fr_1fr]">
-    <div class="space-y-4">
-      {
-        education.map((entry, i) => (
-          <article class="rounded-xl border border-hairline/80 surface-raised p-6 transition-colors hover:accent-border">
-            <div class="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between">
-              <div>
-                <span class="font-mono text-[11px] text-accent">
-                  0x{String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 class="mt-1 font-display text-base font-semibold tracking-tight text-strong">
-                  {entry.institution}
-                </h3>
-                <p class="mt-0.5 text-sm text-body">
-                  {entry.degree ?? entry.program}
-                </p>
-              </div>
-              <div class="text-left sm:text-right">
-                <p class="font-mono text-[11px] text-body">{entry.period}</p>
-                {entry.gpa && <p class="font-mono text-[11px] text-accent-deep">GPA {entry.gpa}</p>}
-              </div>
+  <div class="stagger reveal overflow-hidden rounded-xl border border-hairline surface-raised">
+    {
+      education.map((entry, i) => (
+        <Fragment>
+          {i === 1 && (
+            <div class="border-t border-hairline px-6 py-3 sm:px-7">
+              <p class="font-mono text-[11px] text-accent">
+                <span class="text-accent-deep">~/</span>bootcamps
+              </p>
             </div>
-            {
-              entry.details && (
-                <ul class="mt-4 space-y-2">
-                  {entry.details.map((detail) => (
-                    <li class="flex gap-3 text-[13px] leading-relaxed text-body">
-                      <span class="mt-0.5 font-mono text-accent">&gt;</span>
-                      <span>{detail}</span>
+          )}
+          <article class="grid gap-x-8 gap-y-3 border-t border-hairline p-6 first:border-t-0 sm:p-7 md:grid-cols-[9.5rem_minmax(0,1fr)]">
+            <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1 md:block">
+              <span class="font-mono text-[11px] text-accent">
+                0x{String(i + 1).padStart(2, "0")}
+              </span>
+              <p class="font-mono text-[11px] text-body md:mt-2">{entry.period}</p>
+              <p class="font-mono text-[11px] text-muted md:mt-1">{entry.location}</p>
+              {entry.gpa && <p class="font-mono text-[11px] text-accent md:mt-1">GPA {entry.gpa}</p>}
+            </div>
+
+            <div>
+              <h3 class="font-display text-base font-semibold tracking-tight text-strong">
+                {entry.institution}
+              </h3>
+              {entry.cohorts ? (
+                <ul class="mt-3 space-y-4 border-l border-hairline pl-4">
+                  {entry.cohorts.map((cohort) => (
+                    <li>
+                      <div class="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                        <p class="text-sm text-body">{cohort.program}</p>
+                        <p class="font-mono text-[11px] text-muted">{cohort.period}</p>
+                      </div>
+                      {cohort.details && (
+                        <ul class="mt-1.5 space-y-1.5">
+                          {cohort.details.map((detail) => (
+                            <li class="flex gap-3 text-[13px] leading-relaxed text-body">
+                              <span class="mt-0.5 font-mono text-accent">&gt;</span>
+                              <span>{detail}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </li>
                   ))}
                 </ul>
-              )
-            }
+              ) : (
+                <>
+                  <p class="mt-1 text-sm text-body">{entry.degree ?? entry.program}</p>
+                  {
+                    entry.details && (
+                      <ul class="mt-3 space-y-1.5">
+                        {entry.details.map((detail) => (
+                          <li class="flex gap-3 text-[13px] leading-relaxed text-body">
+                            <span class="mt-0.5 font-mono text-accent">&gt;</span>
+                            <span>{detail}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )
+                  }
+                </>
+              )}
+            </div>
           </article>
-        ))
-      }
-    </div>
+        </Fragment>
+      ))
+    }
+  </div>
 
-    <div class="space-y-6">
-      <div class="rounded-xl border border-hairline/80 surface-raised p-6">
-        <p class="font-mono text-[11px] text-accent"><span class="text-accent-deep">~/</span>certifications</p>
-        <ul class="mt-4 space-y-4">
+  <div class="stagger reveal mt-4 overflow-hidden rounded-xl border border-hairline surface-raised">
+    <div class="grid sm:grid-cols-2">
+      <div class="p-5 sm:p-6">
+        <p class="font-mono text-[11px] text-accent">
+          <span class="text-accent-deep">~/</span>certifications
+        </p>
+        <ul class="mt-3 space-y-2.5">
           {
             certifications.map((cert) => (
-              <li class="flex items-start justify-between gap-4 border-b border-hairline/60 pb-3 last:border-0 last:pb-0">
-                <div>
-                  <p class="text-sm text-body">{cert.name}</p>
-                  <p class="font-mono text-[11px] text-body">{cert.issuer}</p>
+              <li class="flex items-baseline justify-between gap-4">
+                <div class="min-w-0">
+                  <p class="text-[13px] leading-snug text-body">{cert.name}</p>
+                  <p class="font-mono text-[11px] text-muted">{cert.issuer}</p>
                 </div>
-                <span class="font-mono text-[11px] text-body">{cert.year}</span>
+                <span class="shrink-0 font-mono text-[11px] text-muted">{cert.year}</span>
               </li>
             ))
           }
         </ul>
       </div>
 
-      <div class="rounded-xl border border-hairline/80 surface-raised p-6">
-        <p class="font-mono text-[11px] text-accent"><span class="text-accent-deep">~/</span>achievements</p>
-        <ul class="mt-4 space-y-4">
+      <div class="border-t border-hairline p-5 sm:border-l sm:border-t-0 sm:p-6">
+        <p class="font-mono text-[11px] text-accent">
+          <span class="text-accent-deep">~/</span>achievements
+        </p>
+        <ul class="mt-3 space-y-2.5">
           {
             achievements.map((item) => (
-              <li class="border-b border-hairline/60 pb-3 last:border-0 last:pb-0">
-                <div class="flex items-start justify-between gap-4">
-                  <p class="text-sm text-body">{item.title}</p>
-                  <span class="font-mono text-[11px] text-body">{item.year}</span>
+              <li class="flex items-baseline justify-between gap-4">
+                <div class="min-w-0">
+                  <p class="text-[13px] leading-snug text-body">{item.title}</p>
+                  <p class="font-mono text-[11px] text-muted">
+                    {item.role} · {item.technology}
+                  </p>
                 </div>
-                <div class="mt-2 flex gap-2">
-                  <Badge label={item.role} />
-                  <Badge label={item.technology} accent />
-                </div>
+                <span class="shrink-0 font-mono text-[11px] text-muted">{item.year}</span>
               </li>
             ))
           }
