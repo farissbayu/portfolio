@@ -14,7 +14,7 @@ const links = [
 
 <header class="fixed inset-x-0 top-0 z-50 border-b border-hairline/60 surface-sunken backdrop-blur-md">
   <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-3.5" aria-label="Primary">
-    <a href="/" class="group flex items-baseline gap-1 font-mono text-sm text-strong max-md:min-h-11 max-md:min-w-11 max-md:items-center">
+    <a href="/" class="group flex items-baseline font-mono text-sm text-strong max-md:min-h-11 max-md:min-w-11 max-md:items-center">
       <span class="font-semibold">FB</span><span class="text-accent group-hover:text-accent-deep">.</span>
     </a>
 
@@ -39,7 +39,7 @@ const links = [
       <button
         id="theme-toggle"
         type="button"
-        class="inline-flex items-center justify-center rounded-md border border-hairline p-2 text-body transition-colors hover:accent-border-strong hover:text-accent max-md:min-h-11 max-md:min-w-11"
+        class="inline-flex items-center justify-center rounded-md border border-hairline p-2 text-body transition-colors hover:border-[var(--accent-border-strong)] hover:text-accent max-md:min-h-11 max-md:min-w-11"
         aria-label="Switch to light theme"
         title="Switch to light theme"
       >
@@ -54,19 +54,19 @@ const links = [
       <button
         id="menu-toggle"
         type="button"
-        class="inline-flex items-center justify-center rounded-md border border-hairline p-2 text-body transition-colors hover:accent-border-strong hover:text-accent max-md:min-h-11 max-md:min-w-11 md:hidden"
+        class="inline-flex flex-col items-center justify-center gap-[5px] rounded-md border border-hairline p-2 text-body transition-colors hover:border-[var(--accent-border-strong)] hover:text-accent max-md:min-h-11 max-md:min-w-11 md:hidden"
         aria-label="Toggle menu"
         aria-expanded="false"
         aria-controls="mobile-menu"
       >
-        <span class="block h-px w-5 bg-current"></span>
-        <span class="mt-1.5 block h-px w-5 bg-current"></span>
+        <span class="block h-px w-[18px] bg-current"></span>
+        <span class="block h-px w-[18px] bg-current"></span>
       </button>
     </div>
   </nav>
 
-  <div id="mobile-menu" hidden class="border-t border-hairline/60 surface-sunken px-6 py-4 md:hidden">
-    <ul class="flex flex-col gap-4">
+  <div id="mobile-menu" hidden class="border-t border-hairline/60 surface-sunken px-6 md:hidden">
+    <ul class="divide-y divide-[var(--border-hairline)]">
       {
         links.map((link) => (
           <li>
@@ -74,8 +74,9 @@ const links = [
               href={`/#${link.id}`}
               data-nav
               data-section={link.id}
-              class="flex min-h-11 items-center font-mono text-xs uppercase tracking-[0.18em] text-body transition-colors hover:text-accent"
+              class="flex min-h-12 items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-body transition-colors hover:text-accent"
             >
+              <span class="text-accent-deep">›</span>
               {link.label}
             </a>
           </li>
