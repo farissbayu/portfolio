@@ -1,22 +1,44 @@
 ---
 import "../styles/global.css";
 import Navbar from "../components/layout/Navbar.astro";
+import Deck from "../components/layout/Deck.astro";
 import Footer from "../components/layout/Footer.astro";
+import { personal_information, profile } from "../lib/portfolio";
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
+  /** Full-screen slide-by-slide layout; landing page only. */
+  deck?: boolean;
 }
 
 const {
   title = "Faris Bayu Setyawan — Fullstack Developer & AI/LLM Specialist",
   description = "Fullstack web developer building scalable web applications and AI/LLM integrations with React, TypeScript, Laravel, and Python.",
-  image = "/favicon.svg",
+  image = "/og.png",
+  deck = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image, Astro.site);
+const ogImageIsRaster = !ogImage.pathname.endsWith(".svg");
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: personal_information.name,
+  url: Astro.site?.href,
+  email: `mailto:${personal_information.email}`,
+  jobTitle: "Fullstack Developer & AI/LLM Specialist",
+  description: profile,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: personal_information.location,
+    addressCountry: "ID",
+  },
+  sameAs: [personal_information.linkedin],
+};
 ---
 
 <!doctype html>
@@ -28,18 +50,38 @@ const ogImage = new URL(image, Astro.site);
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#3a404a" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f5f6f2" media="(prefers-color-scheme: light)" />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Faris Bayu Setyawan" />
+    {
+      ogImageIsRaster && (
+        <>
+          <meta property="og:image:type" content="image/png" />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta property="og:image:alt" content={`${personal_information.name} — Fullstack Developer & AI/LLM Specialist`} />
+        </>
+      )
+    }
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap"
       rel="stylesheet"
     />
 
@@ -67,8 +109,21 @@ const ogImage = new URL(image, Astro.site);
     <div aria-hidden="true" class="noise pointer-events-none fixed inset-0 -z-10"></div>
 
     <Navbar />
-    <main class="mx-auto max-w-6xl space-y-24 px-6 pt-28 sm:space-y-32">
-      <slot />
+    {deck && <Deck />}
+    <main
+      class:list={[
+        "mx-auto max-w-6xl px-6 pt-28",
+        deck ? "deck" : "space-y-24 sm:space-y-32",
+      ]}
+      tabindex={deck ? -1 : undefined}
+    >
+      {deck ? (
+        <div class="deck-track">
+          <slot />
+        </div>
+      ) : (
+        <slot />
+      )}
     </main>
     <Footer />
 

@@ -11,3 +11,6 @@ dist/
 !.dev.vars.example
 .DS_Store
 *.log
+
+# Local design-audit tooling and screenshots
+.audit/

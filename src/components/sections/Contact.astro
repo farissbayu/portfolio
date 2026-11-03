@@ -5,25 +5,40 @@ import { personal_information } from "../../lib/portfolio";
 ---
 
 <section id="contact" class="reveal scroll-mt-24">
-  <SectionHeader index="08" title="contact" meta="[ let's build ]" />
+  <SectionHeader index="07" title="contact" meta="[ let's build ]" />
 
   <div class="max-w-2xl">
-    <p class="text-sm font-light leading-relaxed text-body">
-      Open to fullstack and AI/LLM engineering work. The fastest way to reach me is email.
+    <p class="max-w-xl text-base font-light leading-relaxed text-body">
+      Open to fullstack and AI/LLM engineering work. The fastest way to reach me
+      is email.
     </p>
-    <div class="mt-6 flex flex-wrap items-center gap-3">
+
+    <div class="mt-7 flex flex-wrap items-center gap-3">
       <a
         href={`mailto:${personal_information.email}`}
-        class="inline-flex min-h-11 items-center font-mono text-xs text-accent transition-colors hover:text-accent-strong md:min-h-0"
+        class="inline-flex min-h-11 items-center rounded-md bg-matcha-700 px-4 py-2 font-mono text-[11px] font-medium text-white transition-colors hover:bg-matcha-600"
       >
-        {personal_information.email}
+        Email me
+      </a>
+      <a
+        href={personal_information.linkedin}
+        target="_blank"
+        rel="noreferrer"
+        class="inline-flex min-h-11 items-center rounded-md border border-hairline surface-raised px-4 py-2 font-mono text-[11px] text-body transition-all duration-200 hover:-translate-y-0.5 hover:accent-border-strong hover:text-accent"
+      >
+        Open LinkedIn <span class="ml-1 text-accent">↗</span>
       </a>
       <CopyButton client:visible value={personal_information.email} />
     </div>
+
     <dl class="mt-8 space-y-3 font-mono text-[11px]">
       <div class="flex gap-3">
         <dt class="w-20 text-body">location</dt>
         <dd class="text-body">{personal_information.location}</dd>
+      </div>
+      <div class="flex gap-3">
+        <dt class="w-20 text-body">email</dt>
+        <dd class="text-body">{personal_information.email}</dd>
       </div>
       <div class="flex gap-3">
         <dt class="w-20 text-body">linkedin</dt>
@@ -41,4 +56,3 @@ import { personal_information } from "../../lib/portfolio";
     </dl>
   </div>
 </section>
-

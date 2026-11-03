@@ -1,16 +1,37 @@
 ---
 import SectionHeader from "../common/SectionHeader.astro";
 import Badge from "../common/Badge.astro";
-import { work_experience } from "../../lib/portfolio";
+import { work_experience, projects } from "../../lib/portfolio";
 import { isHighlightTech } from "../../lib/utils";
+
+// Presentation-level de-dupe: bullets that a project card below already details
+// become a pointer line, so the same story is not read twice. data.json stays
+// untouched; filtering only happens at render time.
+function projectMatchKeys(name: string): string[] {
+  const keys = [name];
+  const words = name.split(" ");
+  if (words.length > 2) keys.push(words.slice(0, 3).join(" ")); // "TIK Asset Management" matches "TIK Asset Management System"
+  return keys;
+}
+
+const jobs = work_experience.map((job) => {
+  const projectNames = projects.map((p) => p.name);
+  const own = job.responsibilities.filter(
+    (r) => !projectNames.some((n) => projectMatchKeys(n).some((k) => r.includes(k)))
+  );
+  const referenced = projectNames.filter((n) =>
+    job.responsibilities.some((r) => projectMatchKeys(n).some((k) => r.includes(k)))
+  );
+  return { ...job, own, referenced };
+});
 ---
 
 <section id="work" class="reveal scroll-mt-24">
-  <SectionHeader index="02" title="work_experience" meta="[ 2023 – Present ]" />
+  <SectionHeader index="02" title="work_experience" meta="[ 2023 · 2025–now ]" />
 
   <div class="stagger reveal space-y-6">
     {
-      work_experience.map((job, i) => (
+      jobs.map((job, i) => (
         <article
           class:list={[
             "tech-card group relative rounded-xl border p-6 transition-all duration-300 sm:p-8",
@@ -39,14 +60,25 @@ import { isHighlightTech } from "../../lib/utils";
             </div>
           </div>
 
-          <ul class="mt-5 space-y-2.5">
-            {job.responsibilities.map((item) => (
-              <li class="flex gap-3 text-sm font-light leading-relaxed text-body">
-                <span class="mt-0.5 font-mono text-accent">&gt;</span>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
+          {job.own.length > 0 && (
+            <ul class="mt-5 space-y-2.5">
+              {job.own.map((item) => (
+                <li class="flex gap-3 text-sm font-light leading-relaxed text-body">
+                  <span class="mt-0.5 font-mono text-accent">&gt;</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {job.referenced.length > 0 && (
+            <p class="font-mono text-[11px] leading-relaxed text-body">
+              <span class="text-accent-deep">$</span> ls ~/projects → {job.referenced.join(" · ")}
+              <a href="#projects" class="ml-1 text-accent transition-colors hover:text-accent-strong">
+                {"↗"}
+              </a>
+            </p>
+          )}
 
           <div class="mt-6 flex flex-wrap gap-2">
             {job.technologies.map((tech) => (

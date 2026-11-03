@@ -3,20 +3,24 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/sections/Hero.astro";
 import Experience from "../components/sections/Experience.astro";
 import Projects from "../components/sections/Projects.astro";
-import Articles from "../components/sections/Articles.astro";
+// Re-enable <Articles /> between Projects and Skills (index 03) once an article
+// is published; then renumber Skills/Education/Listening/Contact.
+// import Articles from "../components/sections/Articles.astro";
 import AppleMusic from "../components/sections/AppleMusic.astro";
 import Skills from "../components/sections/Skills.astro";
 import Education from "../components/sections/Education.astro";
 import Contact from "../components/sections/Contact.astro";
 ---
 
-<BaseLayout>
+<BaseLayout deck>
+  {/* Section order is intentional: proof (work/projects) -> capability (skills)
+      -> credentials (education) -> human touch (listening) -> contact.
+      Keep SectionHeader indexes sequential to the order rendered below. */}
   <Hero />
   <Experience />
   <Projects />
-  <Articles />
-  <AppleMusic />
   <Skills />
   <Education />
+  <AppleMusic />
   <Contact />
 </BaseLayout>

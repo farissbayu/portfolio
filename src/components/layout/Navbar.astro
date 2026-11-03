@@ -1,15 +1,7 @@
 ---
-import { getCollection } from "astro:content";
+import { getSectionLinks } from "../../lib/sections";
 
-const hasArticles = (await getCollection("articles", ({ data }) => !data.draft)).length > 0;
-
-const links = [
-  { id: "about", label: "about" },
-  { id: "work", label: "work" },
-  { id: "projects", label: "projects" },
-  ...(hasArticles ? [{ id: "articles", label: "articles" }] : []),
-  { id: "contact", label: "contact" },
-];
+const links = await getSectionLinks();
 ---
 
 <header class="fixed inset-x-0 top-0 z-50 border-b border-hairline/60 surface-sunken backdrop-blur-md">

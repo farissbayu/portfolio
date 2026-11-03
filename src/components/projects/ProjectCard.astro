@@ -9,8 +9,8 @@ interface Props {
 
 const { project, index } = Astro.props;
 
-// shortcut: assumes responsibilities end with the strongest outcomes; revisit if data order changes.
-const highlights = project.responsibilities.slice(-2);
+// Full detail lives here now; work_experience only points to these cards.
+const details = project.responsibilities;
 ---
 
 <article class="tech-card group flex flex-col rounded-xl border border-hairline surface-sunken p-6 transition-all duration-300 hover:-translate-y-0.5 hover:accent-border-strong">
@@ -48,7 +48,7 @@ const highlights = project.responsibilities.slice(-2);
 
   <ul class="mb-6 mt-4 space-y-2">
     {
-      highlights.map((item) => (
+      details.map((item) => (
         <li class="flex gap-3 text-[13px] leading-relaxed text-body">
           <span class="mt-0.5 font-mono text-accent">&gt;</span>
           <span>{item}</span>

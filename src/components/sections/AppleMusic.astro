@@ -11,14 +11,14 @@ const ranked = topArtists.slice(0, 6);
   ranked.length > 0 && (
     <section id="listening" class="reveal scroll-mt-24">
       <SectionHeader
-        index="05"
+        index="06"
         title="listening"
         meta={`[ ${playlist.trackCount} tracks · apple music ]`}
       />
 
       <div class="grid gap-8 lg:grid-cols-12">
         <div class="lg:col-span-7">
-          <div class="h-[450px] overflow-hidden rounded-xl border border-hairline bg-[var(--surface-sunken)]">
+          <div class="h-[420px] overflow-hidden rounded-xl border border-hairline bg-[var(--surface-sunken)]">
             <iframe
               title={`Apple Music — Replay ${year}`}
               class="block h-full w-full"

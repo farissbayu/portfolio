@@ -1,0 +1,304 @@
+---
+import { getSectionLinks } from "../../lib/sections";
+
+const links = await getSectionLinks();
+const total = links.length;
+---
+
+{/* Section rail (desktop): jump straight to a slide. */}
+<nav
+  aria-label="Slides"
+  class="deck-rail fixed right-3 top-1/2 z-40 -translate-y-1/2 flex-col items-end gap-1.5"
+>
+  {
+    links.map((link, i) => (
+      <a
+        href={`/#${link.id}`}
+        data-nav
+        data-section={link.id}
+        data-deck-link={link.id}
+        class="deck-rail-link group flex items-center gap-2 rounded py-1 pl-3"
+      >
+        <span class="deck-rail-num">{String(i + 1).padStart(2, "0")}</span>
+        <span class="sr-only">{link.label}, slide {i + 1} of {total}</span>
+        <span class="deck-rail-dot" />
+      </a>
+    ))
+  }
+</nav>
+
+{/* Fixed deck bar: never overlaps slide content, unlike a floating pill. */}
+<div class="deck-bar fixed inset-x-0 bottom-0 z-40 border-t border-hairline surface-sunken">
+  <div class="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-6">
+    <p class="hidden min-w-0 items-baseline gap-2 font-mono text-[11px] text-body sm:flex">
+      <span class="text-accent-deep">~/</span>
+      <span data-deck-label class="truncate">{links[0]?.label}</span>
+    </p>
+
+    <span
+      data-deck-hint
+      class="ml-auto mr-2 hidden font-mono text-[10px] text-faint sm:ml-0"
+      aria-hidden="true"
+    >
+      ↓ scroll
+    </span>
+
+    <div class="flex items-center gap-1 font-mono text-[11px] sm:ml-auto">
+      <button
+        type="button"
+        data-deck-prev
+        aria-label="Previous slide"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-full text-body transition-colors hover:text-accent disabled:opacity-30"
+      >
+        <span aria-hidden="true">‹</span>
+      </button>
+      <span data-deck-counter class="min-w-14 text-center tabular-nums text-body" aria-hidden="true">
+        01/{String(total).padStart(2, "0")}
+      </span>
+      <button
+        type="button"
+        data-deck-next
+        aria-label="Next slide"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-full text-body transition-colors hover:text-accent disabled:opacity-30"
+      >
+        <span aria-hidden="true">›</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<p class="sr-only" role="status" aria-live="polite" data-deck-status></p>
+
+<script>
+  const main = document.querySelector<HTMLElement>("main.deck");
+
+  if (main) {
+    const slides = Array.from(
+      main.querySelectorAll<HTMLElement>(":scope > .deck-track > section")
+    ).filter((el) => el.id);
+
+    if (slides.length > 1) {
+      const total = slides.length;
+      const counters = Array.from(document.querySelectorAll<HTMLElement>("[data-deck-counter]"));
+      const labelEl = document.querySelector<HTMLElement>("[data-deck-label]");
+      const statusEl = document.querySelector<HTMLElement>("[data-deck-status]");
+      const prevBtn = document.querySelector<HTMLButtonElement>("[data-deck-prev]");
+      const nextBtn = document.querySelector<HTMLButtonElement>("[data-deck-next]");
+      const railLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-deck-link]"));
+      const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-nav]"));
+      const progress = document.getElementById("scroll-progress");
+      const hintEl = document.querySelector<HTMLElement>("[data-deck-hint]");
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const pad = (n: number) => String(n).padStart(2, "0");
+
+      let index = 0;
+      let lockedUntil = 0;
+
+      slides.forEach((slide, i) => {
+        slide.setAttribute("role", "group");
+        slide.setAttribute("aria-roledescription", "slide");
+        slide.setAttribute("aria-label", `${i + 1} of ${total}: ${slide.id}`);
+        slide.tabIndex = -1;
+      });
+
+      const closer = (value: number) => Math.max(0, Math.min(total - 1, value));
+
+      const updateHint = () => {
+        if (!hintEl) return;
+        const slide = slides[index];
+        const remaining = slide.scrollHeight - slide.clientHeight - slide.scrollTop;
+        hintEl.classList.toggle("hidden", remaining <= 8);
+      };
+
+      const atEdge = (el: HTMLElement, direction: 1 | -1) => {
+        const max = el.scrollHeight - el.clientHeight;
+        if (max <= 1) return true;
+        return direction > 0 ? el.scrollTop >= max - 2 : el.scrollTop <= 2;
+      };
+
+      const setSlide = (
+        next: number,
+        options: { focus?: boolean; instant?: boolean } = {}
+      ) => {
+        const target = closer(next);
+        const changed = target !== index;
+
+        if (options.instant) {
+          main.dataset.instant = "true";
+        } else {
+          delete main.dataset.instant;
+        }
+
+        index = target;
+        main.style.setProperty("--deck-index", String(index));
+
+        slides.forEach((slide, i) => {
+          slide.toggleAttribute("inert", i !== index);
+        });
+        if (changed) slides[index].scrollTop = 0;
+
+        const label = slides[index].id.replace(/_/g, " ");
+        counters.forEach((el) => (el.textContent = `${pad(index + 1)}/${pad(total)}`));
+        if (labelEl) labelEl.textContent = label;
+        if (statusEl) statusEl.textContent = `Slide ${index + 1} of ${total}: ${label}`;
+        if (prevBtn) prevBtn.disabled = index === 0;
+        if (nextBtn) nextBtn.disabled = index === total - 1;
+        if (progress) progress.style.width = `${((index + 1) / total) * 100}%`;
+        updateHint();
+
+        railLinks.forEach((link, i) => {
+          link.setAttribute("aria-current", i === index ? "true" : "false");
+        });
+        navLinks.forEach((link) => {
+          const active = link.dataset.section === slides[index].id;
+          link.setAttribute("aria-current", active ? "true" : "false");
+          link.classList.toggle("text-accent", active);
+        });
+
+        if (options.focus) slides[index].focus({ preventScroll: true });
+
+        if (options.instant) {
+          requestAnimationFrame(() => delete main.dataset.instant);
+        }
+      };
+
+      const go = (next: number, options?: { focus?: boolean }) => setSlide(next, options);
+
+      prevBtn?.addEventListener("click", () => go(index - 1));
+      nextBtn?.addEventListener("click", () => go(index + 1));
+
+      // Nav links (top bar, mobile menu, rail) drive slides instead of scrolling.
+      document.addEventListener(
+        "click",
+        (event) => {
+          const link = (event.target as HTMLElement | null)?.closest<HTMLAnchorElement>(
+            '[data-nav], a[href^="/#"], a[href^="#"]'
+          );
+          if (!link) return;
+          const id = link.dataset.section ?? link.getAttribute("href")?.split("#")[1];
+          const target = slides.findIndex((slide) => slide.id === id);
+          if (target < 0) return;
+
+          event.preventDefault();
+          event.stopPropagation();
+
+          const menu = document.getElementById("mobile-menu");
+          if (menu) menu.hidden = true;
+          document.getElementById("menu-toggle")?.setAttribute("aria-expanded", "false");
+
+          go(target);
+        },
+        true
+      );
+
+      // Keyboard: ←/→ and PageUp/PageDown always change slide. ↑/↓ change slide
+      // only when the current slide cannot scroll further in that direction.
+      window.addEventListener("keydown", (event) => {
+        if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.altKey) return;
+        const target = event.target as HTMLElement | null;
+        if (target?.closest("input, textarea, select, [contenteditable='true']")) return;
+
+        switch (event.key) {
+          case "ArrowRight":
+          case "PageDown":
+            event.preventDefault();
+            go(index + 1, { focus: true });
+            break;
+          case "ArrowLeft":
+          case "PageUp":
+            event.preventDefault();
+            go(index - 1, { focus: true });
+            break;
+          case "Home":
+            event.preventDefault();
+            go(0, { focus: true });
+            break;
+          case "End":
+            event.preventDefault();
+            go(total - 1, { focus: true });
+            break;
+          case "ArrowDown":
+          case "ArrowUp": {
+            const direction = event.key === "ArrowDown" ? 1 : -1;
+            if (atEdge(slides[index], direction)) {
+              event.preventDefault();
+              go(index + direction, { focus: true });
+            }
+            break;
+          }
+        }
+      });
+
+      // Wheel / trackpad: scroll the slide first; flip to the next slide at the edge.
+      main.addEventListener(
+        "wheel",
+        (event) => {
+          if (event.ctrlKey) return;
+          if (Math.abs(event.deltaY) < Math.abs(event.deltaX)) return;
+          const direction: 1 | -1 = event.deltaY > 0 ? 1 : -1;
+          if (!atEdge(slides[index], direction)) return;
+
+          event.preventDefault();
+          if (Date.now() < lockedUntil) return;
+          if (Math.abs(event.deltaY) < 12) return;
+          lockedUntil = Date.now() + 650;
+          go(index + direction);
+        },
+        { passive: false }
+      );
+
+      // Touch: horizontal swipe changes slide; vertical stays native scrolling.
+      let startX = 0;
+      let startY = 0;
+      let tracking = false;
+
+      main.addEventListener(
+        "pointerdown",
+        (event) => {
+          if (event.pointerType === "mouse") return;
+          const target = event.target as HTMLElement | null;
+          if (target?.closest("iframe")) return;
+          tracking = true;
+          startX = event.clientX;
+          startY = event.clientY;
+        },
+        { passive: true }
+      );
+
+      main.addEventListener(
+        "pointerup",
+        (event) => {
+          if (!tracking) return;
+          tracking = false;
+          const dx = event.clientX - startX;
+          const dy = event.clientY - startY;
+          if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+          go(index + (dx < 0 ? 1 : -1));
+        },
+        { passive: true }
+      );
+
+      main.addEventListener("pointercancel", () => {
+        tracking = false;
+      });
+
+      main.addEventListener("scroll", updateHint, { passive: true, capture: true });
+      window.addEventListener("resize", updateHint);
+
+      // Deep link on load, without animating from the first slide.
+      const fromHash = slides.findIndex((slide) => `#${slide.id}` === window.location.hash);
+      setSlide(fromHash > 0 ? fromHash : 0, { instant: true });
+
+      // Hash changes without a reload (e.g. a link shared inside the page)
+      // should still move the deck.
+      window.addEventListener("hashchange", () => {
+        const target = slides.findIndex((slide) => `#${slide.id}` === window.location.hash);
+        if (target >= 0) setSlide(target, { instant: true });
+      });
+
+      if (reduce.addEventListener) {
+        reduce.addEventListener("change", () => setSlide(index, { instant: true }));
+      }
+    }
+  }
+</script>

@@ -18,7 +18,7 @@ const links = [
   <div class="mt-8 grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.4fr_1fr]">
     <div>
       <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
-        $ whoami
+        <span class="mr-3 text-accent-deep">01</span>$ whoami
       </p>
       <h1 class="shimmer mt-4 font-display text-4xl font-bold leading-[1.05] tracking-tight text-strong sm:text-6xl lg:text-7xl">
         {personal_information.name}
@@ -75,6 +75,8 @@ const links = [
             widths={[320, 640]}
             sizes="(max-width: 1024px) 100vw, 380px"
             format="webp"
+            loading="eager"
+            fetchpriority="high"
             class="h-auto w-full object-cover"
           />
           <span class="scanline"></span>
