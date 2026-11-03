@@ -1,0 +1,143 @@
+{
+  "generatedAt": "2026-11-03T03:32:17.218Z",
+  "playlist": {
+    "title": "Replay 2026",
+    "url": "https://music.apple.com/id/playlist/replay-2026/pl.rp-DbXXh1zAN0VV",
+    "embedUrl": "https://embed.music.apple.com/id/playlist/replay-2026/pl.rp-DbXXh1zAN0VV",
+    "trackCount": 100
+  },
+  "topArtists": [
+    {
+      "name": "510",
+      "url": "https://music.apple.com/id/artist/510/463857296",
+      "tracks": 18,
+      "bestPosition": 2,
+      "image": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/11/c6/49/11c649e7-6434-2637-76a7-e1515d3ef962/cover.jpg/320x320ac.jpg",
+      "topTrack": {
+        "title": "Emotional Renegades",
+        "album": "Origin"
+      }
+    },
+    {
+      "name": "Sleep Token",
+      "url": "https://music.apple.com/id/artist/sleep-token/1153723033",
+      "tracks": 18,
+      "bestPosition": 6,
+      "image": "https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages211/v4/a7/d3/2b/a7d32b55-dd70-b51c-a397-aecf0c7ed0f1/ami-identity-16e4d078610b14178a62947c19543f63-2025-03-13T12-07-31.074Z_cropped.png/320x320bb.jpg",
+      "topTrack": {
+        "title": "Gethsemane",
+        "album": "Even In Arcadia"
+      }
+    },
+    {
+      "name": "Spiritbox",
+      "url": "https://music.apple.com/id/artist/spiritbox/1293047384",
+      "tracks": 12,
+      "bestPosition": 18,
+      "image": "https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages211/v4/f7/fa/ea/f7faeafd-e631-8e69-a413-dd1c44b84820/ami-identity-423dc0d848f672893f5a61910629a7ff-2026-09-07T16-20-25.300Z_cropped.png/320x320bb.jpg",
+      "topTrack": {
+        "title": "Soft Spine",
+        "album": "Tsunami Sea"
+      }
+    },
+    {
+      "name": "Bring Me The Horizon",
+      "url": "https://music.apple.com/id/artist/bring-me-the-horizon/121043936",
+      "tracks": 9,
+      "bestPosition": 1,
+      "image": "https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages116/v4/d3/e7/94/d3e794ee-55c4-2fca-223e-7286d82c60cd/0639d658-7d94-467e-b2f8-f5e97289a3cf_ami-identity-82f37e93ca0320f79c8cd58e647f7a6b-2024-01-11T18-32-49.462Z_cropped.png/320x320bb.jpg",
+      "topTrack": {
+        "title": "Dehumanized",
+        "album": "Count Your Blessings"
+      }
+    },
+    {
+      "name": "Bad Omens",
+      "url": "https://music.apple.com/id/artist/bad-omens/467610583",
+      "tracks": 9,
+      "bestPosition": 45,
+      "image": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/20/17/67/20176704-8002-ec25-828d-8fa0db0868c8/198704845987_Cover.jpg/320x320bb.jpg",
+      "topTrack": {
+        "title": "Specter",
+        "album": "Left For Good - Single"
+      }
+    },
+    {
+      "name": "aespa",
+      "url": "https://music.apple.com/id/artist/aespa/1540251304",
+      "tracks": 6,
+      "bestPosition": 83,
+      "image": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/9c/1b/3c/9c1b3c3b-5d3d-e7e9-f42f-65ecd1c8fcf5/888735953873.png/320x320bb.jpg",
+      "topTrack": {
+        "title": "GOOD STUFF (KARINA Solo)",
+        "album": "SYNK : aeXIS LINE - 2025 Special Digital Single - EP"
+      }
+    },
+    {
+      "name": "The Plot In You",
+      "url": "https://music.apple.com/id/artist/the-plot-in-you/378491136",
+      "tracks": 4,
+      "bestPosition": 8,
+      "image": "https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages221/v4/c9/8b/b0/c98bb0fc-37b2-af38-d559-f7e1cda4e8de/ami-identity-63cd898420db57965cac758f7cbbf383-2025-09-10T01-17-38.807Z_cropped.png/320x320bb.jpg",
+      "topTrack": {
+        "title": "FEEL NOTHING",
+        "album": "DISPOSE"
+      }
+    },
+    {
+      "name": "Knocked Loose",
+      "url": "https://music.apple.com/id/artist/knocked-loose/862677537",
+      "tracks": 3,
+      "bestPosition": 27,
+      "image": "https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages122/v4/89/a8/80/89a880b5-f17a-102a-4d01-ca32c71d3915/babd43d8-bf8a-4b55-8a3a-0a06539e51cb_ami-identity-1b294f1dea84017fd5f4efd6a136b6d9-2024-02-27T13-38-26.452Z_cropped.png/320x320bb.jpg",
+      "topTrack": {
+        "title": "Everything is Quiet Now",
+        "album": "Upon Loss Singles - Single"
+      }
+    }
+  ],
+  "topTracks": [
+    {
+      "title": "Dehumanized",
+      "artist": "Bring Me The Horizon",
+      "album": "Count Your Blessings",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/af/60/53/af605380-6bba-b811-6bb2-26ea2606a86c/196874082003.jpg/300x300bb.jpg",
+      "url": "https://music.apple.com/id/album/dehumanized/1891811086?i=1891811440"
+    },
+    {
+      "title": "Emotional Renegades",
+      "artist": "510",
+      "album": "Origin",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/45/3d/55/453d5504-ccda-9e9f-bc94-fc79f90c39ee/cover.jpg/300x300bb.jpg",
+      "url": "https://music.apple.com/id/album/emotional-renegades/1693122583?i=1693123026"
+    },
+    {
+      "title": "The Last Suffer",
+      "artist": "510",
+      "album": "Origin",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/45/3d/55/453d5504-ccda-9e9f-bc94-fc79f90c39ee/cover.jpg/300x300bb.jpg",
+      "url": "https://music.apple.com/id/album/the-last-suffer/1693122583?i=1693123011"
+    },
+    {
+      "title": "Slave to the Rithm",
+      "artist": "ILLENIUM",
+      "album": "ODYSSEY",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/4a/d2/d8/4ad2d8a5-8cad-5c94-aeac-c25719bdf31e/25UM1IM72301.rgb.jpg/300x300bb.jpg",
+      "url": "https://music.apple.com/id/album/slave-to-the-rithm/1851368154?i=1851368164"
+    },
+    {
+      "title": "Black & Blue (2026 Repented)",
+      "artist": "Bring Me The Horizon",
+      "album": "Count Your Blessings",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/af/60/53/af605380-6bba-b811-6bb2-26ea2606a86c/196874082003.jpg/300x300bb.jpg",
+      "url": "https://music.apple.com/id/album/black-blue-2026-repented/1891811086?i=1891811094"
+    },
+    {
+      "title": "Gethsemane",
+      "artist": "Sleep Token",
+      "album": "Even In Arcadia",
+      "artwork": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/45/76/46/457646e0-7bba-770b-f18c-12f7b479dca6/196872847215.jpg/300x300bb.jpg",
+      "url": "https://music.apple.com/id/album/gethsemane/1800532611?i=1800534038"
+    }
+  ]
+}

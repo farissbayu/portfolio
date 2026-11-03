@@ -10,6 +10,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
+    "music": "node scripts/fetch-apple-music.mjs",
     "deploy": "astro build && wrangler deploy --config dist/client/wrangler.json",
     "cf-typegen": "wrangler types",
     "astro": "astro"

@@ -1,0 +1,91 @@
+---
+import SectionHeader from "../common/SectionHeader.astro";
+import replay from "../../data/apple-music.json";
+
+const { playlist, topArtists } = replay;
+const year = playlist.title.match(/\d{4}/)?.[0] ?? "";
+const ranked = topArtists.slice(0, 6);
+---
+
+{
+  ranked.length > 0 && (
+    <section id="listening" class="reveal scroll-mt-24">
+      <SectionHeader
+        index="05"
+        title="listening"
+        meta={`[ ${playlist.trackCount} tracks · apple music ]`}
+      />
+
+      <div class="grid gap-8 lg:grid-cols-12">
+        <div class="lg:col-span-7">
+          <div class="h-[450px] overflow-hidden rounded-xl border border-hairline bg-[var(--surface-sunken)]">
+            <iframe
+              title={`Apple Music — Replay ${year}`}
+              class="block h-full w-full"
+              allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+              sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+              src={playlist.embedUrl}
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <p class="font-mono text-[11px] text-accent">
+            <span class="text-accent-deep">$</span> top_artists --from replay
+          </p>
+          <p class="mt-2 text-sm font-light leading-relaxed text-body">
+            Ranked by how many tracks made it into this year&rsquo;s Replay, so
+            it tracks what actually got repeat plays.
+          </p>
+
+          <ol class="mt-5 divide-y divide-[var(--border-hairline)] border-y border-[var(--border-hairline)]">
+            {ranked.map((artist, index) => (
+              <li>
+                <a
+                  href={artist.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group flex items-center gap-3 py-2.5 pr-2 transition-colors hover:bg-[var(--surface-raised)]"
+                >
+                  <span class="w-5 shrink-0 font-mono text-[10px] text-accent-deep">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <img
+                    src={artist.image}
+                    alt=""
+                    width="40"
+                    height="40"
+                    loading="lazy"
+                    decoding="async"
+                    class="h-10 w-10 shrink-0 rounded-md object-cover"
+                  />
+                  <span class="min-w-0 flex-1">
+                    <span class="block truncate text-sm font-medium text-strong transition-colors group-hover:text-accent">
+                      {artist.name}
+                    </span>
+                    <span class="block truncate font-mono text-[10px] text-body">
+                      {artist.topTrack.title}
+                    </span>
+                  </span>
+                  <span class="shrink-0 font-mono text-[10px] text-body">
+                    <span class="text-accent">×{artist.tracks}</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ol>
+
+          <a
+            href={playlist.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-4 inline-flex min-h-11 items-center gap-1 font-mono text-[11px] text-body transition-colors hover:text-accent md:min-h-0"
+          >
+            open replay {year} <span class="text-accent">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  )
+}
