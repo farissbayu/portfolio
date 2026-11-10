@@ -5,65 +5,23 @@ const links = await getSectionLinks();
 const total = links.length;
 ---
 
-{/* Section rail (desktop): jump straight to a slide. */}
-<nav
-  aria-label="Slides"
-  class="deck-rail fixed right-3 top-1/2 z-40 -translate-y-1/2 flex-col items-end gap-1.5"
->
-  {
-    links.map((link, i) => (
-      <a
-        href={`/#${link.id}`}
-        data-nav
-        data-section={link.id}
-        data-deck-link={link.id}
-        class="deck-rail-link group flex items-center gap-2 rounded py-1 pl-3"
-      >
-        <span class="deck-rail-num">{String(i + 1).padStart(2, "0")}</span>
-        <span class="sr-only">{link.label}, slide {i + 1} of {total}</span>
-        <span class="deck-rail-dot" />
-      </a>
-    ))
-  }
-</nav>
+<div class="deck-wipe" data-deck-wipe aria-hidden="true"></div>
 
-{/* Fixed deck bar: never overlaps slide content, unlike a floating pill. */}
-<div class="deck-bar fixed inset-x-0 bottom-0 z-40 border-t border-hairline surface-sunken">
-  <div class="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-6">
-    <p class="hidden min-w-0 items-baseline gap-2 font-mono text-[11px] text-body sm:flex">
-      <span class="text-accent-deep">~/</span>
-      <span data-deck-label class="truncate">{links[0]?.label}</span>
-    </p>
+{/* Fixed deck bar: slide label, scroll hint, counter, prev/next. */}
+<div class="deck-bar">
+  <p class="deck-bar__slide">
+    <b data-deck-label>{links[0]?.label}</b>
+    <span class="deck-bar__hint" data-deck-hint aria-hidden="true">↓ scroll</span>
+  </p>
 
-    <span
-      data-deck-hint
-      class="ml-auto mr-2 hidden font-mono text-[10px] text-faint sm:ml-0"
-      aria-hidden="true"
-    >
-      ↓ scroll
-    </span>
-
-    <div class="flex items-center gap-1 font-mono text-[11px] sm:ml-auto">
-      <button
-        type="button"
-        data-deck-prev
-        aria-label="Previous slide"
-        class="inline-flex h-11 w-11 items-center justify-center rounded-full text-body transition-colors hover:text-accent disabled:opacity-30"
-      >
-        <span aria-hidden="true">‹</span>
-      </button>
-      <span data-deck-counter class="min-w-14 text-center tabular-nums text-body" aria-hidden="true">
-        01/{String(total).padStart(2, "0")}
-      </span>
-      <button
-        type="button"
-        data-deck-next
-        aria-label="Next slide"
-        class="inline-flex h-11 w-11 items-center justify-center rounded-full text-body transition-colors hover:text-accent disabled:opacity-30"
-      >
-        <span aria-hidden="true">›</span>
-      </button>
-    </div>
+  <div class="deck-bar__nav">
+    <button type="button" data-deck-prev aria-label="Previous slide" class="deck-btn">
+      <span aria-hidden="true">‹</span>
+    </button>
+    <span data-deck-counter class="deck-counter" aria-hidden="true">01/{String(total).padStart(2, "0")}</span>
+    <button type="button" data-deck-next aria-label="Next slide" class="deck-btn">
+      <span aria-hidden="true">›</span>
+    </button>
   </div>
 </div>
 
@@ -84,10 +42,10 @@ const total = links.length;
       const statusEl = document.querySelector<HTMLElement>("[data-deck-status]");
       const prevBtn = document.querySelector<HTMLButtonElement>("[data-deck-prev]");
       const nextBtn = document.querySelector<HTMLButtonElement>("[data-deck-next]");
-      const railLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-deck-link]"));
       const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-nav]"));
       const progress = document.getElementById("scroll-progress");
       const hintEl = document.querySelector<HTMLElement>("[data-deck-hint]");
+      const wipeEl = document.querySelector<HTMLElement>("[data-deck-wipe]");
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
       const pad = (n: number) => String(n).padStart(2, "0");
 
@@ -99,6 +57,7 @@ const total = links.length;
         slide.setAttribute("aria-roledescription", "slide");
         slide.setAttribute("aria-label", `${i + 1} of ${total}: ${slide.id}`);
         slide.tabIndex = -1;
+        slide.dataset.active = String(i === 0);
       });
 
       const closer = (value: number) => Math.max(0, Math.min(total - 1, value));
@@ -108,6 +67,30 @@ const total = links.length;
         const slide = slides[index];
         const remaining = slide.scrollHeight - slide.clientHeight - slide.scrollTop;
         hintEl.classList.toggle("hidden", remaining <= 8);
+      };
+
+      // A slide can be a `.reveal` itself, so include the slide element.
+      const revealables = (slide: HTMLElement) => [
+        ...(slide.matches(".reveal, .stagger") ? [slide] : []),
+        ...Array.from(slide.querySelectorAll(".reveal, .stagger")),
+      ];
+
+      const revealSlide = (next: number) => {
+        slides.forEach((slide) =>
+          revealables(slide).forEach((el) => el.classList.remove("is-visible"))
+        );
+        // Let the browser paint the reset state before re-running the stagger.
+        requestAnimationFrame(() => {
+          if (!slides[next]) return;
+          revealables(slides[next]).forEach((el) => el.classList.add("is-visible"));
+        });
+      };
+
+      const playWipe = () => {
+        if (!wipeEl || reduce.matches) return;
+        wipeEl.classList.remove("is-running");
+        void wipeEl.offsetWidth;
+        wipeEl.classList.add("is-running");
       };
 
       const atEdge = (el: HTMLElement, direction: 1 | -1) => {
@@ -134,11 +117,22 @@ const total = links.length;
 
         slides.forEach((slide, i) => {
           slide.toggleAttribute("inert", i !== index);
+          slide.dataset.active = String(i === index);
         });
         if (changed) slides[index].scrollTop = 0;
 
+        revealSlide(index);
+
+        counters.forEach((el) => {
+          el.textContent = `${pad(index + 1)}/${pad(total)}`;
+          if (changed) {
+            el.classList.remove("is-flip");
+            void el.offsetWidth;
+            el.classList.add("is-flip");
+          }
+        });
+
         const label = slides[index].id.replace(/_/g, " ");
-        counters.forEach((el) => (el.textContent = `${pad(index + 1)}/${pad(total)}`));
         if (labelEl) labelEl.textContent = label;
         if (statusEl) statusEl.textContent = `Slide ${index + 1} of ${total}: ${label}`;
         if (prevBtn) prevBtn.disabled = index === 0;
@@ -146,16 +140,14 @@ const total = links.length;
         if (progress) progress.style.width = `${((index + 1) / total) * 100}%`;
         updateHint();
 
-        railLinks.forEach((link, i) => {
-          link.setAttribute("aria-current", i === index ? "true" : "false");
-        });
         navLinks.forEach((link) => {
-          const active = link.dataset.section === slides[index].id;
-          link.setAttribute("aria-current", active ? "true" : "false");
-          link.classList.toggle("text-accent", active);
+          link.setAttribute("aria-current", link.dataset.section === slides[index].id ? "true" : "false");
         });
 
-        if (options.focus) slides[index].focus({ preventScroll: true });
+        if (changed) {
+          if (options.focus) slides[index].focus({ preventScroll: true });
+          if (!options.instant) playWipe();
+        }
 
         if (options.instant) {
           requestAnimationFrame(() => delete main.dataset.instant);
@@ -167,7 +159,7 @@ const total = links.length;
       prevBtn?.addEventListener("click", () => go(index - 1));
       nextBtn?.addEventListener("click", () => go(index + 1));
 
-      // Nav links (top bar, mobile menu, rail) drive slides instead of scrolling.
+      // Nav links (rail, top bar, mobile menu) drive slides instead of scrolling.
       document.addEventListener(
         "click",
         (event) => {
@@ -296,9 +288,8 @@ const total = links.length;
         if (target >= 0) setSlide(target, { instant: true });
       });
 
-      if (reduce.addEventListener) {
-        reduce.addEventListener("change", () => setSlide(index, { instant: true }));
-      }
+      reduce.addEventListener?.("change", () => setSlide(index, { instant: true }));
+      wipeEl?.addEventListener("animationend", () => wipeEl.classList.remove("is-running"));
     }
   }
 </script>

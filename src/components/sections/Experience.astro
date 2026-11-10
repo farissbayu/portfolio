@@ -26,65 +26,41 @@ const jobs = work_experience.map((job) => {
 });
 ---
 
-<section id="work" class="reveal scroll-mt-24">
-  <SectionHeader index="02" title="work_experience" meta="[ 2023 · 2025–now ]" />
+<section id="work" class="reveal">
+  <SectionHeader
+    index="II"
+    title="Work record"
+    eyebrow="confidant"
+    meta="[ 2023 · 2025–now ]"
+  />
 
-  <div class="stagger reveal space-y-6">
+  <div class="stagger reveal grid gap-3">
     {
       jobs.map((job, i) => (
-        <article
-          class:list={[
-            "tech-card group relative rounded-xl border p-6 transition-all duration-300 sm:p-8",
-            i === 0
-              ? "accent-border current-role"
-              : "border-hairline surface-raised hover:accent-border",
-          ]}
-        >
-          <div class="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-matcha-500/70 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
+        <article class="job">
+          <div class="job__rank">{String(jobs.length - i).padStart(2, "0")}</div>
+          <div class="min-w-0">
+            <h3 class="job__title">{job.position}</h3>
+            <p class="job__where">{job.company} · {job.location}</p>
 
-          <div class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-            <div>
-              <div class="flex items-center gap-3">
-                <span class="font-mono text-[11px] text-accent">
-                  0x{String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 class="font-display text-lg font-semibold tracking-tight text-strong">
-                  {job.position}
-                </h3>
-              </div>
-              <p class="mt-1 text-sm text-body">{job.company}</p>
-            </div>
-            <div class="text-left sm:text-right">
-              <p class="font-mono text-[11px] text-body">{job.period}</p>
-              <p class="font-mono text-[11px] text-body">{job.location}</p>
-            </div>
-          </div>
-
-          {job.own.length > 0 && (
-            <ul class="mt-5 space-y-2.5">
-              {job.own.map((item) => (
-                <li class="flex gap-3 text-sm font-light leading-relaxed text-body">
-                  <span class="mt-0.5 font-mono text-accent">&gt;</span>
-                  <span>{item}</span>
-                </li>
-              ))}
+            <ul class="job__list">
+              {job.own.map((item) => <li class="job__item">{item}</li>)}
             </ul>
-          )}
 
-          {job.referenced.length > 0 && (
-            <p class="font-mono text-[11px] leading-relaxed text-body">
-              <span class="text-accent-deep">$</span> ls ~/projects → {job.referenced.join(" · ")}
-              <a href="#projects" class="ml-1 text-accent transition-colors hover:text-accent-strong">
-                {"↗"}
-              </a>
-            </p>
-          )}
+            {job.referenced.length > 0 && (
+              <p class="mt-2 font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
+                Project detail: {job.referenced.join(" · ")}
+                <a href="#projects" class="text-accent">↗</a>
+              </p>
+            )}
 
-          <div class="mt-6 flex flex-wrap gap-2">
-            {job.technologies.map((tech) => (
-              <Badge label={tech} accent={isHighlightTech(tech)} />
-            ))}
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              {job.technologies.map((tech) => (
+                <Badge label={tech} accent={isHighlightTech(tech)} />
+              ))}
+            </div>
           </div>
+          <div class="job__period">{job.period}</div>
         </article>
       ))
     }

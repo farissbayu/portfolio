@@ -4,55 +4,36 @@ import CopyButton from "../islands/CopyButton.tsx";
 import { personal_information } from "../../lib/portfolio";
 ---
 
-<section id="contact" class="reveal scroll-mt-24">
-  <SectionHeader index="07" title="contact" meta="[ let's build ]" />
+<section id="contact" class="reveal">
+  <SectionHeader index="VII" title="Contact" eyebrow="the house awaits" meta="[ let's build ]" />
 
-  <div class="max-w-2xl">
-    <p class="max-w-xl text-base font-light leading-relaxed text-body">
-      Open to fullstack and AI/LLM engineering work. The fastest way to reach me
-      is email.
-    </p>
+  <div class="contact-band">
+    <div>
+      <p class="contact-band__k">The heist is recruiting</p>
+      <h2>Take your time.</h2>
+      <p>
+        Open to fullstack and AI/LLM engineering work. Email is the fastest route — usually answered
+        within one working day.
+      </p>
+    </div>
 
-    <div class="mt-7 flex flex-wrap items-center gap-3">
-      <a
-        href={`mailto:${personal_information.email}`}
-        class="inline-flex min-h-11 items-center rounded-md bg-matcha-700 px-4 py-2 font-mono text-[11px] font-medium text-white transition-colors hover:bg-matcha-600"
-      >
-        Email me
+    <div class="contact-band__acts">
+      <a class="p-btn" href={`mailto:${personal_information.email}`}>
+        <span>{personal_information.email}</span>
       </a>
       <a
+        class="p-btn p-btn--ghost"
         href={personal_information.linkedin}
         target="_blank"
         rel="noreferrer"
-        class="inline-flex min-h-11 items-center rounded-md border border-hairline surface-raised px-4 py-2 font-mono text-[11px] text-body transition-all duration-200 hover:-translate-y-0.5 hover:accent-border-strong hover:text-accent"
-      >
-        Open LinkedIn <span class="ml-1 text-accent">↗</span>
-      </a>
+      ><span>LinkedIn ↗</span></a>
       <CopyButton client:visible value={personal_information.email} />
     </div>
+  </div>
 
-    <dl class="mt-8 space-y-3 font-mono text-[11px]">
-      <div class="flex gap-3">
-        <dt class="w-20 text-body">location</dt>
-        <dd class="text-body">{personal_information.location}</dd>
-      </div>
-      <div class="flex gap-3">
-        <dt class="w-20 text-body">email</dt>
-        <dd class="text-body">{personal_information.email}</dd>
-      </div>
-      <div class="flex gap-3">
-        <dt class="w-20 text-body">linkedin</dt>
-        <dd>
-          <a
-            href={personal_information.linkedin}
-            target="_blank"
-            rel="noreferrer"
-            class="inline-flex min-h-11 items-center text-body transition-colors hover:text-accent md:min-h-0"
-          >
-            /in/faris-bayu-setyawan
-          </a>
-        </dd>
-      </div>
-    </dl>
+  <div class="mt-4 flex flex-wrap gap-x-6 gap-y-1 font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
+    <span>Location · {personal_information.location}, ID</span>
+    <span>Availability · Full-time</span>
+    <span>Timezone · GMT+7</span>
   </div>
 </section>

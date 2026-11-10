@@ -19,13 +19,8 @@ export default function CopyButton({ value, label = "copy email" }: Props) {
   }
 
   return (
-    <button
-      type="button"
-      onClick={copy}
-      aria-label={label}
-      className="inline-flex min-h-11 items-center justify-center rounded-md border border-hairline surface-raised px-4 py-2 font-mono text-[11px] text-body transition-all duration-200 hover:-translate-y-0.5 hover:accent-border-strong hover:text-accent"
-    >
-      {copied ? "✓ copied" : label}
+    <button type="button" onClick={copy} aria-label={label} className="p-btn p-btn--ghost">
+      <span>{copied ? "✓ copied" : label}</span>
     </button>
   );
 }

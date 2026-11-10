@@ -15,16 +15,14 @@ const visible = headings.filter((heading) => heading.depth === 2 || heading.dept
 
 {
   visible.length > 0 && (
-    <nav aria-label="Table of contents" class="font-mono text-[11px]">
-      <p class="text-accent">
-        <span class="text-accent-deep">~/</span>on_this_page
-      </p>
-      <ul class="mt-4 space-y-2.5">
+    <nav aria-label="Table of contents" class="font-mono text-[10px] uppercase tracking-[0.14em]">
+      <p class="eyebrow">On this page</p>
+      <ul class="mt-3 border-t border-hairline">
         {visible.map((heading) => (
-          <li class={heading.depth === 3 ? "pl-4" : ""}>
+          <li class:list={[heading.depth === 3 && "pl-3"]}>
             <a
               href={`#${heading.slug}`}
-              class="text-body transition-colors hover:text-accent"
+              class="block border-b border-hairline py-2 normal-case tracking-[0.06em] text-body transition-colors hover:text-accent"
             >
               {heading.text}
             </a>

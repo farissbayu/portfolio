@@ -2,18 +2,12 @@
 interface Props {
   label: string;
   accent?: boolean;
+  dark?: boolean;
 }
 
-const { label, accent = false } = Astro.props;
+const { label, accent = false, dark = false } = Astro.props;
 ---
 
 <span
-  class:list={[
-    "pill-hover inline-flex items-center rounded border px-2 py-0.5 font-mono text-[11px]",
-    accent
-      ? "accent-border accent-surface text-accent hover:accent-border-strong hover:text-accent-strong"
-      : "border-hairline surface-raised text-body hover:accent-border-strong hover:text-accent",
-  ]}
->
-  {label}
-</span>
+  class:list={["p-tag", accent && "p-tag--accent", dark && "p-tag--dark"]}
+><span>{label}</span></span>

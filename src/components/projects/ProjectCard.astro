@@ -1,6 +1,5 @@
 ---
 import type { Project } from "../../types/portfolio";
-import { isHighlightTech } from "../../lib/utils";
 
 interface Props {
   project: Project;
@@ -8,69 +7,36 @@ interface Props {
 }
 
 const { project, index } = Astro.props;
-
-// Full detail lives here now; work_experience only points to these cards.
-const details = project.responsibilities;
+const num = String(index + 1).padStart(3, "0");
 ---
 
-<article class="tech-card group flex flex-col rounded-xl border border-hairline surface-sunken p-6 transition-all duration-300 hover:-translate-y-0.5 hover:accent-border-strong">
-  <div class="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-matcha-500/70 to-transparent opacity-0 transition-opacity group-hover:opacity-100"></div>
+<article class="p-card project">
+  <span class="p-card__tab">No. {num}</span>
 
-  <div class="flex items-center justify-between">
-    <span class="font-mono text-[11px] text-accent">
-      P.{String(index + 1).padStart(2, "0")}
-    </span>
-    <span class="font-mono text-[10px] uppercase tracking-[0.16em] text-body">
-      {project.role}
-    </span>
-  </div>
-
-  <h3 class="mt-4 font-display text-lg font-semibold tracking-tight text-strong">
+  <h3 class="project__title">
     {
       project.link ? (
-        <a
-          href={project.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex min-h-11 items-center gap-1 transition-colors hover:text-accent md:min-h-0"
-        >
-          {project.name}
-          <span class="font-mono text-xs text-accent">↗</span>
+        <a href={project.link} target="_blank" rel="noopener noreferrer">
+          {project.name} ↗
         </a>
       ) : (
         project.name
       )
     }
   </h3>
-  <p class="mt-2 text-sm font-light leading-relaxed text-body">
-    {project.description}
-  </p>
+  <p class="project__role">{project.role}</p>
+  <p class="project__body">{project.description}</p>
 
-  <ul class="mb-6 mt-4 space-y-2">
-    {
-      details.map((item) => (
-        <li class="flex gap-3 text-[13px] leading-relaxed text-body">
-          <span class="mt-0.5 font-mono text-accent">&gt;</span>
-          <span>{item}</span>
-        </li>
-      ))
-    }
+  <ul class="project__details">
+    {project.responsibilities.map((item) => <li>{item}</li>)}
   </ul>
 
-  <div class="mt-auto flex flex-wrap gap-2 border-t border-hairline pt-5">
-    {
-      project.technologies.map((tech) => (
-        <span
-          class:list={[
-            "rounded border px-2 py-0.5 font-mono text-[11px]",
-            isHighlightTech(tech)
-              ? "accent-border accent-surface text-accent"
-              : "border-hairline surface-raised text-body",
-          ]}
-        >
-          {tech}
-        </span>
-      ))
-    }
+  <div class="project__tags">
+    {project.technologies.map((tech) => <span class="p-tag p-tag--dark"><span>{tech}</span></span>)}
+  </div>
+
+  <div class="project__go">
+    <span>{project.link ? "Live site" : "Case file"}</span>
+    <span aria-hidden="true">↗</span>
   </div>
 </article>

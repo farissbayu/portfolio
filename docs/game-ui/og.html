@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070a06; --panel:#0f130c; --paper:#f6ffe4; --ink:#0a0c06;
+    --accent:#c9f73d; --accent-ink:#d7ff6b; --signal:#ff4fa3; --body:#c8d1b8; --muted:#8a9478;
+    --display:"Anton",Impact,sans-serif; --sans:"Barlow",sans-serif; --mono:"JetBrains Mono",monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#000}
+  .og{position:relative;width:1200px;height:630px;overflow:hidden;color:var(--body);
+      background:radial-gradient(90% 80% at 50% -20%,#1a201a 0%,#0b0f09 55%,#070a06 100%);font-family:var(--sans)}
+  .dots{position:absolute;inset:0;opacity:.10;
+      background-image:radial-gradient(var(--paper) 1px,transparent 1.2px);background-size:7px 7px}
+  .slab{position:absolute;left:-40px;top:-60px;width:300px;height:260px;background:var(--accent);
+      transform:rotate(-9deg);clip-path:polygon(0 0,100% 6%,94% 100%,0 92%)}
+  .frame{position:absolute;inset:0}
+  .rule{position:absolute;left:72px;top:78px;width:86px;height:5px;background:var(--accent);transform:skewX(-30deg)}
+  .eyebrow{position:absolute;left:72px;top:104px;font-family:var(--mono);font-size:11px;
+      letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+  h1{position:absolute;left:70px;top:140px;margin:0;font-family:var(--display);font-weight:400;
+      font-size:88px;line-height:.9;letter-spacing:.01em;text-transform:uppercase;color:var(--paper);
+      text-shadow:6px 6px 0 rgba(201,247,61,.4)}
+  h1 em{display:block;font-style:normal;color:var(--accent-ink);text-shadow:none}
+  .role{position:absolute;left:72px;top:352px;font-family:var(--mono);font-size:12px;
+      letter-spacing:.2em;text-transform:uppercase;color:var(--body)}
+  .role b{color:var(--accent);font-weight:500}
+  .tags{position:absolute;left:72px;top:392px;display:flex;gap:8px}
+  .tag{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);
+      background:var(--paper);border:2px solid var(--ink);padding:3px 9px;transform:skewX(-8deg)}
+  .tag.acc{background:var(--accent)}
+  .stat{position:absolute;left:72px;bottom:64px;display:flex;gap:36px}
+  .stat div{display:flex;flex-direction:column;gap:2px}
+  .stat b{font-family:var(--display);font-weight:400;font-size:26px;line-height:1;color:var(--paper)}
+  .stat span{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .portrait{position:absolute;right:64px;top:96px;width:330px;transform:rotate(-2.2deg)}
+  .portrait .pf{background:var(--paper);border:3px solid var(--ink);padding:7px;box-shadow:12px 12px 0 rgba(0,0,0,.85)}
+  .portrait img{display:block;width:100%;height:330px;object-fit:cover;filter:contrast(1.06) saturate(.9)}
+  .portrait .slab2{position:absolute;top:-16px;left:-22px;background:var(--accent);color:var(--ink);
+      font-family:var(--display);font-size:19px;letter-spacing:.05em;text-transform:uppercase;
+      padding:3px 18px;transform:rotate(-4deg);box-shadow:5px 5px 0 #0a0c06}
+  .portrait .stamp{position:absolute;right:-14px;bottom:-18px;background:var(--paper);color:var(--ink);
+      font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+      padding:6px 10px;border:2px solid var(--ink);transform:rotate(3deg)}
+  .url{position:absolute;right:64px;bottom:64px;font-family:var(--mono);font-size:11px;
+      letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .url b{color:var(--accent);font-weight:500}
+  .num{position:absolute;right:70px;top:44px;font-family:var(--display);font-size:26px;color:var(--accent);letter-spacing:.1em}
+</style>
+</head>
+<body>
+<div class="og">
+  <div class="slab"></div>
+  <div class="dots"></div>
+  <div class="frame">
+    <div class="rule"></div>
+    <div class="eyebrow">Calling card · Product engineer</div>
+    <h1>Faris Bayu <em>Setyawan</em></h1>
+    <p class="role"><b>Fullstack</b> · AI / LLM · React · Laravel · FastAPI</p>
+    <div class="tags">
+      <span class="tag acc">Open to full-time</span>
+      <span class="tag">Malang, ID</span>
+    </div>
+    <div class="stat">
+      <div><b>02</b><span>Roles</span></div>
+      <div><b>03</b><span>Projects</span></div>
+      <div><b>3.73</b><span>GPA</span></div>
+    </div>
+    <div class="portrait">
+      <div class="pf"><img src="../../src/assets/photo_profile.jpeg" alt=""></div>
+      <span class="slab2">Player 01</span>
+      <span class="stamp">Available 2026</span>
+    </div>
+    <div class="num">01</div>
+    <div class="url">farissbay<b>.my.id</b></div>
+  </div>
+</div>
+</body>
+</html>

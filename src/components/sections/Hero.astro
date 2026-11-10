@@ -2,89 +2,78 @@
 import { Image } from "astro:assets";
 import photo from "../../assets/photo_profile.jpeg";
 import StatusPill from "../common/StatusPill.astro";
-import { personal_information, profile } from "../../lib/portfolio";
+import {
+  personal_information,
+  profile,
+  work_experience,
+  projects,
+  education,
+  certifications,
+} from "../../lib/portfolio";
 
 const roles = ["Fullstack Developer", "AI/LLM Integration", "React · Laravel · FastAPI"];
 
-const links = [
-  { label: "Email me", href: `mailto:${personal_information.email}`, primary: true },
-  { label: "LinkedIn", href: personal_information.linkedin, primary: false },
+const stats = [
+  { value: String(work_experience.length).padStart(2, "0"), label: "Roles held" },
+  { value: String(projects.length).padStart(2, "0"), label: "Projects shipped" },
+  { value: education[0]?.gpa ?? "—", label: "GPA" },
+  { value: String(certifications.length).padStart(2, "0"), label: "Certifications" },
 ];
 ---
 
-<section id="about" class="reveal scroll-mt-24">
+<section id="about" class="reveal">
   <StatusPill />
 
-  <div class="mt-8 grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.4fr_1fr]">
+  <div class="hero mt-6">
     <div>
-      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
-        <span class="mr-3 text-accent-deep">01</span>$ whoami
-      </p>
-      <h1 class="shimmer mt-4 font-display text-4xl font-bold leading-[1.05] tracking-tight text-strong sm:text-6xl lg:text-7xl">
-        {personal_information.name}
-      </h1>
+      <span class="eyebrow">Calling card · Product engineer</span>
+      <h1 class="hero__name">Faris Bayu <em>Setyawan</em></h1>
 
-      <div class="mt-5 flex flex-wrap gap-2">
-        {
-          roles.map((role) => (
-            <span class="rounded border border-hairline surface-raised px-2.5 py-1 font-mono text-[11px] text-body">
-              {role}
-            </span>
-          ))
-        }
+      <div class="mt-4 flex flex-wrap gap-2">
+        {roles.map((role) => <span class="p-tag"><span>{role}</span></span>)}
       </div>
 
-      <p class="mt-7 max-w-2xl text-base font-light leading-relaxed text-body sm:text-lg">
-        {profile}
-      </p>
+      <p class="hero__lede">{profile}</p>
 
-      <div class="mt-8 flex flex-wrap items-center gap-3">
-        {
-          links.map((link) => (
-            <a
-              href={link.href}
-              target={link.href.startsWith("http") ? "_blank" : undefined}
-              rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-              class:list={[
-                "inline-flex min-h-11 items-center rounded-md px-4 py-2 font-mono text-[11px] transition-all duration-200 md:min-h-0",
-                link.primary
-                  ? "bg-matcha-700 font-medium text-white hover:bg-matcha-600"
-                  : "border border-hairline surface-raised text-body hover:-translate-y-0.5 hover:accent-border-strong hover:text-accent",
-              ]}
-            >
-              {link.label}
-            </a>
-          ))
-        }
-        <span class="font-mono text-[11px] text-body">Based in {personal_information.location}</span>
+      <div class="hero__cta">
+        <a class="p-btn" href={`mailto:${personal_information.email}`}><span>Email me</span></a>
+        <a
+          class="p-btn p-btn--ghost"
+          href={personal_information.linkedin}
+          target="_blank"
+          rel="noreferrer"
+        ><span>LinkedIn ↗</span></a>
+        <span class="hero__where">{personal_information.location}, ID · GMT+7</span>
       </div>
     </div>
 
-    <div class="relative">
-      <div class="tech-card scanlines float-slow overflow-hidden rounded-xl border border-hairline/80 surface-raised">
-        <div class="flex items-center gap-2 border-b border-hairline/80 px-4 py-2.5">
-          <span class="h-2.5 w-2.5 rounded-full surface-raised"></span>
-          <span class="h-2.5 w-2.5 rounded-full surface-raised"></span>
-          <span class="h-2.5 w-2.5 rounded-full accent-solid"></span>
-          <span class="ml-2 font-mono text-[10px] text-body">~/profile.jpeg</span>
-        </div>
-        <div class="relative">
-          <Image
-            src={photo}
-            alt={`Portrait of ${personal_information.name}`}
-            widths={[320, 640]}
-            sizes="(max-width: 1024px) 100vw, 380px"
-            format="webp"
-            loading="eager"
-            fetchpriority="high"
-            class="h-auto w-full object-cover"
-          />
-          <span class="scanline"></span>
-        </div>
-        <div class="flex items-center border-t border-hairline/80 px-4 py-2">
-          <span class="font-mono text-[10px] text-body">{personal_information.location}</span>
-        </div>
+    <aside class="portrait hero__portrait">
+      <div class="portrait__dots" aria-hidden="true"></div>
+      <div class="portrait__frame">
+        <Image
+          src={photo}
+          alt={`Portrait of ${personal_information.name}`}
+          widths={[320, 640]}
+          sizes="(max-width: 1024px) 100vw, 330px"
+          format="webp"
+          loading="eager"
+          fetchpriority="high"
+          class="block h-auto w-full object-cover"
+        />
       </div>
-    </div>
+      <span class="portrait__slab">Player 01</span>
+      <span class="portrait__stamp">Available for full-time</span>
+    </aside>
+  </div>
+
+  <div class="stat-strip">
+    {
+      stats.map((stat) => (
+        <div>
+          <b>{stat.value}</b>
+          <span>{stat.label}</span>
+        </div>
+      ))
+    }
   </div>
 </section>

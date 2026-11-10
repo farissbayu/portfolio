@@ -4,13 +4,14 @@ import ProjectCard from "../projects/ProjectCard.astro";
 import { projects } from "../../lib/portfolio";
 ---
 
-<section id="projects" class="reveal scroll-mt-24">
-  <SectionHeader index="03" title="projects" meta={`[ ${projects.length} entries ]`} />
-  <div class="stagger reveal grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-    {
-      projects.map((project, i) => (
-        <ProjectCard project={project} index={i} />
-      ))
-    }
+<section id="projects" class="reveal">
+  <SectionHeader
+    index="III"
+    title="Projects"
+    eyebrow="palaces"
+    meta={`[ ${projects.length} entries ]`}
+  />
+  <div class="cards-3 stagger reveal">
+    {projects.map((project, i) => <ProjectCard project={project} index={i} />)}
   </div>
 </section>

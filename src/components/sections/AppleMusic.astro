@@ -9,46 +9,43 @@ const ranked = topArtists.slice(0, 6);
 
 {
   ranked.length > 0 && (
-    <section id="listening" class="reveal scroll-mt-24">
+    <section id="listening" class="reveal">
       <SectionHeader
-        index="06"
-        title="listening"
+        index="VI"
+        title="Listening"
+        eyebrow="repertoire"
         meta={`[ ${playlist.trackCount} tracks · apple music ]`}
       />
 
-      <div class="grid gap-8 lg:grid-cols-12">
-        <div class="lg:col-span-7">
-          <div class="h-[420px] overflow-hidden rounded-xl border border-hairline bg-[var(--surface-sunken)]">
-            <iframe
-              title={`Apple Music — Replay ${year}`}
-              class="block h-full w-full"
-              allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
-              sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-              src={playlist.embedUrl}
-              loading="lazy"
-            />
-          </div>
+      <div class="listen-grid">
+        <div class="listen-frame">
+          <iframe
+            title={`Apple Music — Replay ${year}`}
+            class="block h-full w-full"
+            allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+            src={playlist.embedUrl}
+            loading="lazy"
+          />
         </div>
 
-        <div class="lg:col-span-5">
-          <p class="font-mono text-[11px] text-accent">
-            <span class="text-accent-deep">$</span> top_artists --from replay
-          </p>
-          <p class="mt-2 text-sm font-light leading-relaxed text-body">
-            Ranked by how many tracks made it into this year&rsquo;s Replay, so
-            it tracks what actually got repeat plays.
+        <div>
+          <p class="eyebrow">Top artists — from replay {year}</p>
+          <p class="mt-2 max-w-[42ch] text-[13px] font-light leading-relaxed text-body">
+            Ranked by how many tracks made it into this year&rsquo;s Replay, so it tracks what actually
+            got repeat plays.
           </p>
 
-          <ol class="mt-5 divide-y divide-[var(--border-hairline)] border-y border-[var(--border-hairline)]">
+          <ol class="mt-4 border-t border-hairline">
             {ranked.map((artist, index) => (
               <li>
                 <a
                   href={artist.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="group flex items-center gap-3 py-2.5 pr-2 transition-colors hover:bg-[var(--surface-raised)]"
+                  class="artist-row"
                 >
-                  <span class="w-5 shrink-0 font-mono text-[10px] text-accent-deep">
+                  <span class="w-5 shrink-0 font-mono text-[9px] text-accent">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <img
@@ -58,17 +55,17 @@ const ranked = topArtists.slice(0, 6);
                     height="40"
                     loading="lazy"
                     decoding="async"
-                    class="h-10 w-10 shrink-0 rounded-md object-cover"
+                    class="h-10 w-10 shrink-0 object-cover"
                   />
                   <span class="min-w-0 flex-1">
-                    <span class="block truncate text-sm font-medium text-strong transition-colors group-hover:text-accent">
+                    <span class="block truncate text-[13px] font-medium text-strong">
                       {artist.name}
                     </span>
-                    <span class="block truncate font-mono text-[10px] text-body">
+                    <span class="block truncate font-mono text-[9px] text-muted">
                       {artist.topTrack.title}
                     </span>
                   </span>
-                  <span class="shrink-0 font-mono text-[10px] text-body">
+                  <span class="shrink-0 font-mono text-[9px] text-muted">
                     <span class="text-accent">×{artist.tracks}</span>
                   </span>
                 </a>
@@ -80,9 +77,9 @@ const ranked = topArtists.slice(0, 6);
             href={playlist.url}
             target="_blank"
             rel="noopener noreferrer"
-            class="mt-4 inline-flex min-h-11 items-center gap-1 font-mono text-[11px] text-body transition-colors hover:text-accent md:min-h-0"
+            class="mt-3 inline-flex min-h-11 items-center font-mono text-[10px] uppercase tracking-[0.16em] text-body transition-colors hover:text-accent md:min-h-0"
           >
-            open replay {year} <span class="text-accent">↗</span>
+            open replay {year} <span class="ml-1 text-accent">↗</span>
           </a>
         </div>
       </div>

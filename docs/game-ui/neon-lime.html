@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Neon Lime — Design System &amp; Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070A06; --panel:#0F130C; --panel-2:#131809; --line:#262C1F;
+    --paper:#F6FFE4; --ink:#0A0C06; --grey:#B4BCA6; --muted:#8A9478;
+    --acc:#C9F73D; --acc-deep:#9FD01E; --on-acc:#0A0C06; --acc-ink:#D7FF6B;
+    --acc-on-light:#5A7A08; --sig:#FF4FA3; --shade:rgba(201,247,61,.42);
+    --display:"Anton",Impact,sans-serif;
+    --sans:"Barlow",ui-sans-serif,system-ui,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#050505;color:#F7F7F7;font-family:var(--sans);-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1440px;margin:0 auto;padding:44px 40px 72px}
+  h1,h2,h3,h4,p{margin:0}
+  a{color:inherit;text-decoration:none}
+  .mono{font-family:var(--mono);text-transform:uppercase;letter-spacing:.14em;font-size:10px}
+
+  /* ---------- shared parts ---------- */
+  .p-btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    font-family:var(--display);text-transform:uppercase;letter-spacing:.03em;font-size:15px;
+    color:var(--on-acc);background:var(--acc);border:3px solid var(--ink);padding:11px 24px;
+    transform:skewX(-9deg);box-shadow:5px 5px 0 rgba(0,0,0,.75);cursor:pointer}
+  .p-btn > *{transform:skewX(9deg);display:inline-block}
+  .p-btn.ghost{background:transparent;color:var(--paper);border-color:var(--paper);box-shadow:5px 5px 0 rgba(0,0,0,.55)}
+  .p-tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;text-transform:uppercase;
+    letter-spacing:.1em;padding:3px 8px;border:2px solid var(--ink);background:var(--paper);color:var(--ink);transform:skewX(-8deg)}
+  .p-tag > *{transform:skewX(8deg)}
+  .p-tag.acc{background:var(--acc);color:var(--on-acc)}
+  .p-card{background:var(--paper);color:var(--ink);border:3px solid var(--ink);box-shadow:8px 8px 0 var(--shade);position:relative}
+  .p-card .tab{position:absolute;top:-14px;left:14px;background:var(--acc);color:var(--on-acc);font-family:var(--display);
+    font-size:13px;letter-spacing:.06em;text-transform:uppercase;padding:3px 12px;transform:rotate(-2deg);
+    box-shadow:3px 3px 0 var(--ink);border:2px solid var(--ink)}
+  .bar{height:8px;background:rgba(255,255,255,.07);border:2px solid var(--ink)}
+  .bar i{display:block;height:100%;background:var(--acc)}
+
+  /* ---------- cover ---------- */
+  .cover{background:#0B0B0B;border:3px solid #242424;padding:34px 36px 36px;position:relative;overflow:hidden}
+  .cover::before{content:"";position:absolute;inset:0;opacity:.14;pointer-events:none;
+    background-image:radial-gradient(#fff 1px,transparent 1.2px);background-size:8px 8px;
+    mask-image:linear-gradient(115deg,#000,transparent 60%)}
+  .cover::after{content:"";position:absolute;right:-70px;top:-90px;width:280px;height:260px;background:var(--acc);
+    opacity:.11;transform:rotate(9deg);clip-path:polygon(0 0,100% 8%,100% 100%,6% 92%)}
+  .cv-head{position:relative;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;
+    border-bottom:2px solid #242424;padding-bottom:20px;margin-bottom:22px}
+  .kicker{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+    text-transform:uppercase;background:#F7F7F7;color:#0B0B0B;padding:4px 10px;transform:skewX(-10deg)}
+  .kicker > *{transform:skewX(10deg)}
+  .cv-title{font-family:var(--display);font-size:52px;line-height:.92;text-transform:uppercase;margin-top:14px;color:#fff}
+  .cv-title em{font-style:normal;color:var(--acc)}
+  .cv-sub{max-width:62ch;margin-top:12px;color:#B9B9B9;font-size:13.5px;line-height:1.65}
+  .cv-meta{font-family:var(--mono);font-size:10px;color:#6E6E6E;text-align:right;line-height:2;text-transform:uppercase;letter-spacing:.14em}
+  .cv-meta b{display:block;font-family:var(--display);font-size:28px;color:var(--acc);line-height:1}
+  .cv-row{position:relative;display:flex;flex-wrap:wrap;gap:10px}
+  .cv-chip{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:9px;letter-spacing:.16em;
+    text-transform:uppercase;color:#B9B9B9;border:1px solid #2C2C2C;background:#121212;padding:6px 10px}
+  .cv-chip i{width:9px;height:9px;display:block;transform:rotate(45deg)}
+
+  /* ---------- spec board ---------- */
+  .board{position:relative;background:var(--bg);border:3px solid var(--line);padding:36px 36px 38px;overflow:hidden;margin-top:26px}
+  .board::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.2;
+    background:radial-gradient(52% 62% at 84% -22%,var(--acc) 0%,transparent 62%)}
+  .board::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.10;
+    background-image:radial-gradient(var(--paper) 1px,transparent 1.2px);background-size:8px 8px;
+    mask-image:linear-gradient(115deg,#000,transparent 58%)}
+  .board-head{position:relative;display:flex;justify-content:space-between;align-items:flex-start;gap:28px;
+    flex-wrap:wrap;padding-bottom:20px;border-bottom:2px solid var(--line);margin-bottom:24px}
+  .board-head .kbar{position:absolute;left:0;top:-14px;width:74px;height:5px;background:var(--acc);transform:skewX(-30deg)}
+  .board-title{font-family:var(--display);font-size:46px;line-height:.94;letter-spacing:.01em;text-transform:uppercase;
+    color:var(--paper);margin-top:16px}
+  .board-title span{color:var(--acc-ink)}
+  .board-sub{max-width:62ch;margin-top:13px;color:var(--grey);font-size:13.5px;line-height:1.65}
+  .board-meta{font-family:var(--mono);font-size:9px;color:var(--muted);text-align:right;line-height:2;
+    text-transform:uppercase;letter-spacing:.16em;position:relative}
+  .board-meta b{display:block;font-family:var(--display);font-size:30px;color:var(--acc-ink);line-height:1}
+  .sect{position:relative;display:flex;align-items:center;gap:12px;margin:26px 0 14px;
+    font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:var(--paper)}
+  .sect .num{background:var(--acc);color:var(--on-acc);padding:2px 7px;font-weight:700;transform:skewX(-10deg)}
+  .sect::after{content:"";flex:1;height:2px;background:repeating-linear-gradient(90deg,var(--line) 0 10px,transparent 10px 16px)}
+  .cols{display:grid;gap:14px;position:relative}
+  .c2{grid-template-columns:1fr 1fr}
+  .c5{grid-template-columns:repeat(5,1fr)}
+  .card-mini{background:var(--panel);border:2px solid var(--line);padding:15px 16px}
+  .label{font-family:var(--mono);font-size:8.5px;text-transform:uppercase;letter-spacing:.18em;color:var(--muted);margin-bottom:10px}
+  .swatch{height:84px;display:flex;flex-direction:column;justify-content:flex-end;padding:9px;border:2px solid var(--line)}
+  .swatch b{font-family:var(--display);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+  .swatch code{font-family:var(--mono);font-size:9.5px;opacity:.8;margin-top:1px}
+  .nav-demo{display:grid;gap:6px;font-family:var(--display);text-transform:uppercase;font-size:19px;letter-spacing:.02em}
+  .nav-demo div{padding:3px 9px;color:var(--muted)}
+  .nav-demo .on{color:var(--on-acc);background:var(--acc);transform:skewX(-9deg);box-shadow:4px 4px 0 var(--paper);width:max-content}
+  .nav-demo .on span{display:inline-block;transform:skewX(9deg)}
+  .type-scale div{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--line);padding:7px 0}
+  .type-scale span{font-family:var(--mono);font-size:8.5px;color:var(--muted);min-width:72px;letter-spacing:.1em}
+  .halftone-demo{height:88px;border:2px solid var(--line);position:relative;overflow:hidden;background:var(--bg)}
+  .halftone-demo i{position:absolute;inset:0;background-image:radial-gradient(var(--paper) 1.1px,transparent 1.3px);background-size:6px 6px;opacity:.4}
+  .halftone-demo b{position:absolute;left:14px;bottom:10px;font-family:var(--display);font-size:24px;color:var(--acc-ink);letter-spacing:.03em}
+  .notes{display:grid;gap:9px;font-size:13px;line-height:1.55;color:var(--grey);margin:0;padding:0}
+  .notes li{list-style:none;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:baseline}
+  .notes li::before{content:"";width:9px;height:3px;background:var(--acc);transform:skewX(-30deg);display:block;margin-top:7px}
+  .notes b{color:var(--paper);font-weight:600}
+  .map{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;font-size:12.5px;line-height:1.5;color:var(--grey);margin:0}
+  .map dt{font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc-ink);padding-top:3px}
+  .map dd{margin:0}
+
+  /* ---------- preview ---------- */
+  .stage-note{display:flex;align-items:center;gap:12px;margin:34px 0 12px;font-family:var(--mono);
+    font-size:9px;text-transform:uppercase;letter-spacing:.2em;color:#6E6E6E}
+  .stage-note::after{content:"";flex:1;height:2px;background:repeating-linear-gradient(90deg,#2A2A2A 0 10px,transparent 10px 16px)}
+  .stage{border:3px solid #242424;overflow:hidden}
+  .home{background:var(--bg);color:var(--paper);font-size:15px;line-height:1.62}
+  .home .shell{display:grid;grid-template-columns:250px 1fr;min-height:100%}
+
+  .rail{background:var(--bg);border-right:2px solid var(--line);padding:26px 0 30px 26px;position:relative;overflow:hidden}
+  .rail::before{content:"";position:absolute;inset:0;opacity:.09;background-image:radial-gradient(var(--paper) 1px,transparent 1.2px);background-size:7px 7px}
+  .rail .mark{display:flex;align-items:center;gap:10px;margin-bottom:34px;position:relative}
+  .rail .mark b{font-family:var(--display);font-size:22px;letter-spacing:.04em;background:var(--acc);color:var(--on-acc);padding:2px 8px 0;transform:rotate(-3deg)}
+  .rail .mark small{font-family:var(--mono);font-size:8px;letter-spacing:.2em;color:var(--muted);line-height:1.5;text-transform:uppercase}
+  .rail nav{display:grid;gap:4px;position:relative}
+  .rail nav a{font-family:var(--display);font-size:25px;line-height:1.12;text-transform:uppercase;letter-spacing:.02em;
+    color:var(--muted);padding:3px 10px;width:max-content}
+  .rail nav a.on{color:var(--on-acc);background:var(--acc);transform:skewX(-9deg);box-shadow:5px 5px 0 var(--paper)}
+  .rail nav a.on span{display:inline-block;transform:skewX(9deg)}
+  .rail .meta{position:relative;margin-top:34px;font-family:var(--mono);font-size:9px;line-height:2;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+  .rail .meta b{color:var(--paper);font-weight:500}
+  .rail .flag{position:relative;margin-top:20px;display:inline-flex;align-items:center;gap:7px;background:var(--acc);
+    color:var(--on-acc);font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px;
+    transform:skewX(-10deg)}
+  .rail .flag i{width:6px;height:6px;background:var(--sig);border-radius:50%;display:block}
+
+  .content{position:relative;overflow:hidden}
+  .content::before{content:"";position:absolute;top:-140px;right:-80px;width:560px;height:340px;background:var(--acc);
+    transform:rotate(9deg);opacity:.16;clip-path:polygon(0 0,100% 8%,100% 100%,6% 92%)}
+  .pad{padding:34px 44px 0 40px;position:relative}
+  .hero{display:grid;grid-template-columns:1fr 330px;gap:40px;align-items:start}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--grey)}
+  .eyebrow::before{content:"";width:34px;height:6px;background:var(--acc);transform:skewX(-30deg)}
+  .hero h2{font-family:var(--display);font-size:70px;line-height:.88;letter-spacing:.01em;text-transform:uppercase;margin-top:16px;
+    text-shadow:6px 6px 0 var(--shade)}
+  .hero h2 em{font-style:normal;color:var(--acc-ink);text-shadow:none;display:block}
+  .roles{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+  .hero p.lede{margin-top:16px;max-width:48ch;color:var(--grey);font-size:14.5px}
+  .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:24px;align-items:center}
+  .cta .where{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+  .portrait{position:relative;transform:rotate(-2.4deg);margin-top:6px}
+  .portrait .frame{border:3px solid var(--ink);background:var(--paper);padding:7px;box-shadow:10px 10px 0 rgba(0,0,0,.85)}
+  .portrait img{display:block;width:100%;aspect-ratio:1/1.02;object-fit:cover;filter:contrast(1.08) saturate(.92)}
+  .portrait .slab{position:absolute;top:-16px;left:-22px;background:var(--acc);color:var(--on-acc);font-family:var(--display);
+    text-transform:uppercase;font-size:16px;letter-spacing:.05em;padding:4px 16px;transform:rotate(-4deg);box-shadow:5px 5px 0 #0B0B0B}
+  .portrait .stamp{position:absolute;bottom:-18px;right:-16px;background:var(--paper);color:var(--ink);font-family:var(--mono);
+    font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:6px 10px;border:2px solid var(--ink);transform:rotate(3deg)}
+  .portrait .dots{position:absolute;width:70px;height:70px;left:-26px;bottom:26px;opacity:.4;
+    background-image:radial-gradient(var(--paper) 1.2px,transparent 1.4px);background-size:8px 8px}
+
+  .ticker{margin-top:34px;border-top:2px solid var(--line);border-bottom:2px solid var(--line);display:grid;
+    grid-template-columns:repeat(4,1fr)}
+  .ticker div{padding:14px 10px;display:flex;flex-direction:column;gap:2px;border-right:1px solid var(--line)}
+  .ticker div:last-child{border-right:0}
+  .ticker b{font-family:var(--display);font-size:30px;line-height:1;letter-spacing:.02em;color:var(--paper)}
+  .ticker span{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin:42px 0 22px}
+  .sec-head h3{font-family:var(--display);font-size:36px;line-height:1;text-transform:uppercase;letter-spacing:.02em;color:var(--paper)}
+  .sec-head h3 span{color:var(--acc-ink)}
+  .sec-head .meta{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+
+  .confidant{display:grid;gap:12px}
+  .confidant .row{display:grid;grid-template-columns:52px 1fr auto;gap:18px;align-items:center;background:var(--panel);
+    border:2px solid var(--line);padding:14px 18px;position:relative}
+  .confidant .row::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--acc)}
+  .confidant .rank{font-family:var(--display);font-size:30px;line-height:1;color:var(--acc-ink);text-align:center}
+  .confidant h4{font-size:16px;font-weight:700;letter-spacing:.01em;color:var(--paper)}
+  .confidant .where{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+  .confidant p{font-size:12.5px;color:var(--grey);margin-top:6px;line-height:1.55;max-width:70ch}
+  .confidant .stars{font-size:13px;letter-spacing:.14em;color:var(--acc-ink);white-space:nowrap}
+
+  .palaces{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .palace{padding:22px 18px 16px;display:flex;flex-direction:column;gap:8px;min-height:250px}
+  .palace .num{font-family:var(--display);font-size:13px;letter-spacing:.14em;color:var(--acc-on-light)}
+  .palace h4{font-family:var(--display);font-size:23px;line-height:1;text-transform:uppercase;letter-spacing:.02em}
+  .palace .role{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#6E6E6E}
+  .palace p{font-size:12.5px;line-height:1.55;color:#333}
+  .palace .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto;padding-top:10px}
+  .palace .tags .p-tag{background:var(--ink);color:var(--paper);border-color:var(--ink);font-size:8.5px}
+  .palace .go{margin-top:10px;border-top:2px solid var(--ink);padding-top:8px;display:flex;justify-content:space-between;
+    font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc-on-light)}
+
+  .skills{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+  .skill{background:var(--panel);border:2px solid var(--line);padding:14px 12px}
+  .skill h5{margin:0 0 10px;font-family:var(--display);font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+    display:flex;flex-direction:column;gap:6px;color:var(--paper)}
+  .skill h5::after{content:"";height:4px;background:var(--acc);width:26px;transform:skewX(-30deg)}
+  .skill ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+  .skill li{font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;color:var(--grey);border-bottom:1px dotted var(--line);padding-bottom:3px}
+
+  .contact{margin:46px 0 0;background:var(--acc);color:var(--on-acc);padding:30px 40px;display:grid;
+    grid-template-columns:1.25fr .75fr;gap:30px;align-items:center;position:relative;overflow:hidden;
+    clip-path:polygon(0 8%,2% 0,99.5% 3%,100% 96%,97% 100%,1% 97%,0 92%)}
+  .contact::before{content:"";position:absolute;inset:0;opacity:.2;
+    background-image:radial-gradient(currentColor 1px,transparent 1.2px);background-size:7px 7px}
+  .contact .k{position:relative;font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;opacity:.85}
+  .contact h3{position:relative;font-family:var(--display);font-size:46px;line-height:.95;text-transform:uppercase;margin-top:8px;color:var(--on-acc)}
+  .contact p{position:relative;font-size:13px;margin-top:10px;max-width:44ch;color:var(--on-acc);opacity:.9}
+  .contact .acts{position:relative;display:grid;gap:12px}
+  .contact .p-btn{background:var(--ink);color:var(--paper);border-color:var(--ink);box-shadow:5px 5px 0 rgba(0,0,0,.35)}
+  .contact .p-btn.ghost{border-color:var(--ink);color:var(--paper)}
+
+  .foot{display:flex;justify-content:space-between;gap:16px;padding:20px 0 24px;margin-top:22px;
+    border-top:2px solid var(--line);font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+  @media (max-width:900px){
+    .wrap{padding:20px 14px 40px}
+    .cover,.board{padding:22px 18px 26px}
+    .cv-title{font-size:30px}
+    .board-title{font-size:30px}
+    .c2,.c5{grid-template-columns:1fr 1fr}
+    .home .shell{grid-template-columns:1fr}
+    .rail{border-right:0;border-bottom:2px solid var(--line);padding:18px 18px 20px}
+    .rail nav{display:flex;flex-wrap:wrap;gap:6px}
+    .rail nav a{font-size:17px}
+    .rail .mark{margin-bottom:16px}
+    .rail .meta{display:none}
+    .pad{padding:22px 18px 0}
+    .hero{grid-template-columns:1fr;gap:28px}
+    .hero h2{font-size:44px}
+    .portrait{max-width:320px}
+    .ticker{grid-template-columns:1fr 1fr}
+    .palaces,.skills{grid-template-columns:1fr}
+    .confidant .row{grid-template-columns:40px 1fr;gap:12px}
+    .confidant .stars{grid-column:2}
+    .contact{grid-template-columns:1fr;padding:24px 20px}
+    .contact h3{font-size:30px}
+    .foot{flex-direction:column;gap:6px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ---------- cover ---------- -->
+  <section class="cover" id="cover">
+    <div class="cv-head">
+      <div>
+        <span class="kicker"><span>Calling card · Neon Lime</span></span>
+        <h1 class="cv-title">Neon <em>Lime</em></h1>
+        <p class="cv-sub">Sistem desain gaya Persona 5 tanpa merahnya: kanvas hitam kehijauan, aksen lime
+          dengan teks hitam (kontras 15.6:1), dan satu sinyal pink. Layout rail vertikal, Anton, blok
+          miring, halftone, dan kartu putih tetap dipertahankan.</p>
+      </div>
+      <div class="cv-meta"><b>01</b>SISTEM TUNGGAL<br>SPEK + PREVIEW<br>1440</div>
+    </div>
+    <div class="cv-row">
+      <span class="cv-chip"><i style="background:#C9F73D"></i>Accent #C9F73D</span>
+      <span class="cv-chip"><i style="background:#070A06;border:1px solid #3A3A3A"></i>Canvas #070A06</span>
+      <span class="cv-chip"><i style="background:#F6FFE4"></i>Paper #F6FFE4</span>
+      <span class="cv-chip"><i style="background:#FF4FA3"></i>Signal #FF4FA3</span>
+      <span class="cv-chip"><i style="background:#D7FF6B"></i>Ink-accent #D7FF6B</span>
+    </div>
+  </section>
+
+  <!-- ---------- spec ---------- -->
+  <section id="spec" class="board">
+    <header class="board-head">
+      <div>
+        <span class="kbar"></span>
+        <span class="kicker"><span>UI Kit · Confidant Menu</span></span>
+        <h2 class="board-title">Neon <span>Lime</span></h2>
+        <p class="board-sub">Lime adalah permukaan, bukan teks: setiap blok lime memakai teks ink.
+          Teks lime hanya dipakai di atas kanvas gelap sebagai aksen judul. Pink #FF4FA3 hanya
+          muncul sebagai titik status, tidak pernah sebagai permukaan.</p>
+      </div>
+      <div class="board-meta"><b>NL</b>NEON LIME<br>AKSEN 15.6:1 · AA+<br>1440 × AUTO</div>
+    </header>
+
+    <div class="sect"><span class="num">01</span> Palette</div>
+    <div class="cols c5">
+      <div class="swatch" style="background:var(--acc);color:var(--ink)"><b>Accent</b><code>#C9F73D</code></div>
+      <div class="swatch" style="background:var(--bg);color:var(--paper)"><b>Canvas</b><code>#070A06</code></div>
+      <div class="swatch" style="background:var(--paper);color:var(--ink)"><b>Paper</b><code>#F6FFE4</code></div>
+      <div class="swatch" style="background:var(--panel);color:var(--acc-ink)"><b>Accent ink</b><code>#D7FF6B</code></div>
+      <div class="swatch" style="background:var(--sig);color:var(--ink)"><b>Signal</b><code>#FF4FA3</code></div>
+    </div>
+
+    <div class="cols c2" style="margin-top:14px">
+      <div class="card-mini">
+        <div class="label">Navigation — inverted selection</div>
+        <div class="nav-demo">
+          <div class="on"><span>Projects</span></div>
+          <div>About</div>
+          <div>Work</div>
+          <div>Contact</div>
+        </div>
+      </div>
+      <div class="card-mini">
+        <div class="label">Halftone — 6px dot grid</div>
+        <div class="halftone-demo"><i></i><b>TAKE YOUR TIME</b></div>
+        <div class="label" style="margin-top:12px">Tags &amp; buttons</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+          <button class="p-btn"><span>Email me</span></button>
+          <span class="p-tag"><span>React</span></span>
+          <span class="p-tag acc"><span>Live</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sect"><span class="num">02</span> Type &amp; components</div>
+    <div class="cols c2">
+      <div class="type-scale">
+        <div><span>H1 / 70 ANTON</span><b style="font-family:var(--display);font-size:38px;line-height:.9;text-transform:uppercase">Faris Bayu</b></div>
+        <div><span>H3 / 36</span><b style="font-family:var(--display);font-size:26px;line-height:1;text-transform:uppercase">Palaces</b></div>
+        <div><span>BODY / 14.5</span><b style="font-weight:400;color:var(--grey);font-size:13.5px">Product engineer, end-to-end delivery.</b></div>
+        <div><span>META / 9</span><b class="mono" style="color:var(--muted)">CONFIDANT · RANK 03</b></div>
+      </div>
+      <div class="card-mini">
+        <div class="label">Meters</div>
+        <div style="display:grid;gap:9px">
+          <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--muted)"><span>DELIVERY</span><span>92 / 100</span></div>
+          <div class="bar"><i style="width:92%"></i></div>
+          <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--muted)"><span>AI / LLM</span><span>86 / 100</span></div>
+          <div class="bar"><i style="width:86%"></i></div>
+        </div>
+        <div style="margin-top:14px;display:flex;gap:8px;align-items:center">
+          <span class="p-tag acc"><span>Open to work</span></span>
+          <span style="color:var(--acc-ink);font-size:13px;letter-spacing:.14em">★★★☆☆</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cols c2" style="margin-top:18px">
+      <div class="card-mini">
+        <div class="label">Mapping ke portfolio</div>
+        <dl class="map">
+          <dt>Nav</dt><dd>Rail vertikal; item aktif jadi blok lime dengan bayangan putih.</dd>
+          <dt>Hero</dt><dd>Nama Anton + portrait miring seperti calling card.</dd>
+          <dt>Work</dt><dd>Confidant ranks — satu baris per atasan.</dd>
+          <dt>Projects</dt><dd>Palaces — kartu putih bernomor.</dd>
+          <dt>Skills</dt><dd>Kartu gelap, garis lime sebagai level.</dd>
+          <dt>Contact</dt><dd>Band lime "Take your time".</dd>
+        </dl>
+      </div>
+      <div class="card-mini">
+        <div class="label">Usage rules</div>
+        <ul class="notes">
+          <li><span><b>Teks di atas lime selalu ink.</b> Putih di atas #C9F73D cuma 1.7:1 — dilarang.</span></li>
+          <li><span><b>Lime jangan dua blok berdampingan.</b> Satu band, satu tombol utama, strip meter.</span></li>
+          <li><span><b>Pink cuma 6px.</b> Titik status di samping "open to work"; bukan permukaan.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- preview ---------- -->
+  <div class="stage-note">Preview · Homepage · 1440</div>
+  <div class="stage">
+    <div class="home" id="home">
+      <div class="shell">
+
+        <aside class="rail">
+          <div class="mark">
+            <b>FBS</b>
+            <small>Product<br>Engineer</small>
+          </div>
+          <nav aria-label="Sections">
+            <a href="#" class="on"><span>About</span></a>
+            <a href="#">Work</a>
+            <a href="#">Projects</a>
+            <a href="#">Skills</a>
+            <a href="#">Contact</a>
+          </nav>
+          <div class="meta">
+            <div>Player · <b>Faris Bayu</b></div>
+            <div>Location · <b>Malang, ID</b></div>
+            <div>Status · <b>Full-time</b></div>
+          </div>
+          <span class="flag"><i></i>Open to work</span>
+        </aside>
+
+        <div class="content">
+          <div class="pad">
+            <div class="hero">
+              <div>
+                <span class="eyebrow">Calling card · Product engineer</span>
+                <h2>Faris<br>Bayu <em>Setyawan</em></h2>
+                <div class="roles">
+                  <span class="p-tag acc"><span>Fullstack</span></span>
+                  <span class="p-tag"><span>AI / LLM</span></span>
+                  <span class="p-tag"><span>React · Laravel</span></span>
+                </div>
+                <p class="lede">Bangun sistem digital untuk sektor publik dan swasta, dari desain database
+                  sampai integrasi LLM di production. Dua tahun terakhir: platform hibah pendidikan dan
+                  manajemen aset TIK dengan GitLab + AI reporting.</p>
+                <div class="cta">
+                  <button class="p-btn"><span>Email me</span></button>
+                  <button class="p-btn ghost"><span>LinkedIn ↗</span></button>
+                  <span class="where">GMT+7 · Malang</span>
+                </div>
+              </div>
+
+              <div class="portrait">
+                <div class="dots"></div>
+                <div class="frame"><img src="../../src/assets/photo_profile.jpeg" alt="Faris Bayu Setyawan"></div>
+                <div class="slab">Player 01</div>
+                <div class="stamp">Available for full-time</div>
+              </div>
+            </div>
+
+            <div class="ticker">
+              <div><b>02</b><span>Confidants</span></div>
+              <div><b>03</b><span>Palaces</span></div>
+              <div><b>3.73</b><span>GPA</span></div>
+              <div><b>65</b><span>Bangkit top</span></div>
+            </div>
+
+            <div class="sec-head">
+              <h3>Confidant <span>/ work</span></h3>
+              <span class="meta">Rank 01–02</span>
+            </div>
+            <div class="confidant">
+              <div class="row">
+                <div class="rank">02</div>
+                <div>
+                  <h4>Fullstack Developer — Dinas Kominfo Kab. Pasuruan</h4>
+                  <div class="where">Aug 2025 – Present · Pasuruan, ID</div>
+                  <p>Digitalisasi alur analisis jabatan, SGS Pendidikan untuk Dinas Pendidikan, dan
+                    TIK Asset Management dengan GitLab + AI reporting.</p>
+                </div>
+                <div class="stars">★★★★★</div>
+              </div>
+              <div class="row">
+                <div class="rank">01</div>
+                <div>
+                  <h4>Software Engineer Intern — PT Tetanggaku Saling Bantu</h4>
+                  <div class="where">Oct 2023 – Nov 2023 · Jakarta, ID</div>
+                  <p>Backend fraud-detection API, model ML untuk aktivitas mencurigakan, dan QA
+                    pre-release aplikasi mobile.</p>
+                </div>
+                <div class="stars">★★★★☆</div>
+              </div>
+            </div>
+
+            <div class="sec-head">
+              <h3>Palaces <span>/ projects</span></h3>
+              <span class="meta">3 heists cleared</span>
+            </div>
+            <div class="palaces">
+              <article class="p-card palace">
+                <span class="tab">No. 001</span>
+                <div class="num">01 / WEB</div>
+                <h4>SGS Pendidikan</h4>
+                <div class="role">Fullstack Developer</div>
+                <p>Platform hibah sekolah: data sekolah, pengajuan, verifikasi, dan pelaporan SPJ.</p>
+                <div class="tags">
+                  <span class="p-tag"><span>PHP</span></span>
+                  <span class="p-tag"><span>React</span></span>
+                  <span class="p-tag"><span>Laravel</span></span>
+                  <span class="p-tag"><span>MySQL</span></span>
+                </div>
+                <div class="go"><span>Case file</span><span>↗</span></div>
+              </article>
+              <article class="p-card palace">
+                <span class="tab">No. 002</span>
+                <div class="num">02 / SYSTEM</div>
+                <h4>TIK Asset Mgmt</h4>
+                <div class="role">Fullstack Developer</div>
+                <p>Manajemen task &amp; project dengan GitLab dan laporan bulanan otomatis berbasis AI.</p>
+                <div class="tags">
+                  <span class="p-tag"><span>AI/LLM</span></span>
+                  <span class="p-tag"><span>GitLab</span></span>
+                  <span class="p-tag"><span>React</span></span>
+                </div>
+                <div class="go"><span>Case file</span><span>↗</span></div>
+              </article>
+              <article class="p-card palace">
+                <span class="tab">No. 003</span>
+                <div class="num">03 / APP</div>
+                <h4>Personal Dev Log</h4>
+                <div class="role">Frontend Developer</div>
+                <p>Catat pencapaian kerja format STAR per workspace, dengan editor Markdown.</p>
+                <div class="tags">
+                  <span class="p-tag"><span>React</span></span>
+                  <span class="p-tag"><span>Vite</span></span>
+                  <span class="p-tag"><span>Markdown</span></span>
+                </div>
+                <div class="go"><span>Live site</span><span>↗</span></div>
+              </article>
+            </div>
+
+            <div class="sec-head">
+              <h3>Skill <span>/ cards</span></h3>
+              <span class="meta">Equipped</span>
+            </div>
+            <div class="skills">
+              <div class="skill"><h5>Frontend</h5><ul><li>TypeScript</li><li>React</li><li>Next.js</li><li>Tailwind</li></ul></div>
+              <div class="skill"><h5>Backend</h5><ul><li>PHP</li><li>Laravel</li><li>Python</li><li>FastAPI</li></ul></div>
+              <div class="skill"><h5>Database</h5><ul><li>MySQL</li><li>PostgreSQL</li><li>Prisma</li><li>SQLModel</li></ul></div>
+              <div class="skill"><h5>AI / LLM</h5><ul><li>RAG</li><li>Agents</li><li>Embeddings</li><li>MCP</li></ul></div>
+              <div class="skill"><h5>Infra</h5><ul><li>Linux</li><li>Nginx</li><li>Cloudflare</li><li>GitLab</li></ul></div>
+            </div>
+
+            <div class="contact">
+              <div>
+                <div class="k">The heist is recruiting</div>
+                <h3>Take your time.</h3>
+                <p>Terbuka untuk posisi fullstack dan AI/LLM. Email adalah jalur tercepat untuk mulai.</p>
+              </div>
+              <div class="acts">
+                <button class="p-btn"><span>bayustfa@gmail.com</span></button>
+                <button class="p-btn ghost"><span>LinkedIn ↗</span></button>
+              </div>
+            </div>
+
+            <div class="foot">
+              <span>© 2026 Faris Bayu Setyawan</span>
+              <span>Calling card — Malang, ID</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

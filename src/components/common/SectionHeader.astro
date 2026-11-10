@@ -2,18 +2,20 @@
 interface Props {
   index: string;
   title: string;
+  eyebrow?: string;
   meta?: string;
 }
 
-const { index, title, meta } = Astro.props;
+const { index, title, eyebrow, meta } = Astro.props;
 ---
 
-<div class="section-rule reveal mb-8 flex items-end justify-between gap-4 border-b border-hairline/80 pb-4">
-  <div class="flex items-baseline gap-3">
-    <span class="font-mono text-[11px] text-accent">{index}</span>
-    <h2 class="font-display text-xl font-semibold tracking-tight text-strong">
-      <span class="font-mono text-base text-accent-deep">~/</span>{title}
-    </h2>
+<div class="sec-head reveal">
+  <div class="sec-head__title">
+    <span class="sec-head__num">{index}</span>
+    <div>
+      {eyebrow && <span class="sec-head__eyebrow">{eyebrow}</span>}
+      <h2>{title}</h2>
+    </div>
   </div>
-  {meta && <span class="hidden font-mono text-[11px] text-body sm:block">{meta}</span>}
+  {meta && <span class="meta hidden sm:block">{meta}</span>}
 </div>

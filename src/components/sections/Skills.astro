@@ -2,50 +2,30 @@
 import SectionHeader from "../common/SectionHeader.astro";
 import { skills } from "../../lib/portfolio";
 
-const categories = [
-  { key: "frontend", label: "frontend", span: "md:col-span-3", accent: false },
-  { key: "backend", label: "backend", span: "md:col-span-3", accent: false },
-  { key: "ai_and_llm", label: "ai_and_llm", span: "md:col-span-4", accent: true },
-  { key: "database", label: "database", span: "md:col-span-2", accent: false },
-  { key: "infrastructure", label: "infrastructure", span: "md:col-span-6", accent: true },
+const groups = [
+  { key: "frontend", label: "Frontend" },
+  { key: "backend", label: "Backend" },
+  { key: "database", label: "Database" },
+  { key: "ai_and_llm", label: "AI / LLM" },
+  { key: "infrastructure", label: "Infra" },
 ] as const;
 ---
 
-<section id="skills" class="reveal scroll-mt-24">
-  <SectionHeader index="04" title="skills" meta="[ arsenal ]" />
+<section id="skills" class="reveal">
+  <SectionHeader index="IV" title="Skills" eyebrow="codex" meta="[ equipped ]" />
 
-  <div class="stagger reveal grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-hairline/80 surface-raised/60 md:grid-cols-6">
+  <div class="skills stagger reveal">
     {
-      categories.map((category) => {
-        const items = skills[category.key];
-        return (
-          <div
-            class:list={[
-              "surface-sunken p-6 transition-colors hover:surface-raised",
-              category.span,
-            ]}
-          >
-            <p class="font-mono text-[11px] text-accent">
-              <span class="text-accent-deep">~/</span>
-              {category.label}
-            </p>
-            <div class="mt-4 flex flex-wrap gap-2">
-              {items.map((item) => (
-                <span
-                  class:list={[
-                    "rounded-md border px-2.5 py-1 font-mono text-[11px] transition-colors",
-                    category.accent
-                      ? "accent-border accent-surface text-accent hover:accent-border-strong"
-                      : "border-hairline surface-raised text-body hover:accent-border-strong hover:text-accent",
-                  ]}
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
-        );
-      })
+      groups.map((group) => (
+        <div class="skill">
+          <h3>{group.label}</h3>
+          <ul>
+            {skills[group.key].map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      ))
     }
   </div>
 </section>
