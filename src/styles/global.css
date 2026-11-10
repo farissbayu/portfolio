@@ -1244,6 +1244,18 @@ html:not(.js) main.deck > .deck-track > section + section,
   color: var(--accent-on-light);
 }
 
+.project__go--link {
+  text-decoration: none;
+  transition: color var(--dur-ui) ease;
+}
+
+.project__go--link:hover,
+.project__go--link:focus-visible {
+  color: var(--text-on-card);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 /* skills */
 .skills {
   display: grid;

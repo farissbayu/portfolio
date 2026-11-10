@@ -11,7 +11,7 @@ const articles = (await getCollection("articles", ({ data }) => !data.draft))
 {
   articles.length > 0 && (
     <section id="articles" class="reveal scroll-mt-24">
-      <SectionHeader index="04" title="articles" meta={`[ ${articles.length} recent ]`} />
+      <SectionHeader index="IV" title="articles" meta={`[ ${articles.length} recent ]`} />
       <div class="stagger reveal grid grid-cols-1 gap-6 md:grid-cols-3">
         {articles.map((entry) => (
           <ArticleCard entry={entry} />

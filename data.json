@@ -92,15 +92,25 @@
     },
     {
       "name": "Personal Dev Log",
-      "role": "Frontend Developer",
-      "description": "A web app for capturing brag-worthy wins and lessons in STAR format, organized by workspace with Markdown notes.",
+      "role": "Fullstack Developer",
+      "description": "A private dev log that turns rough daily notes into STAR entries, audits the engineer behind them with AI, and exports everything as Markdown.",
       "link": "https://pdevlog.farissbay.my.id/",
+      "caseStudy": "pdevlog",
       "responsibilities": [
-        "Developed the responsive single-page application in React and TypeScript.",
-        "Implemented STAR-format entry capture and workspace-based organization.",
-        "Built Markdown note editing and rendering with client-side persistence."
+        "Built the React single-page app and a Hono API on Cloudflare Workers, sharing Zod schemas across both.",
+        "Designed the D1 schema with Drizzle ORM, row-level per-user scoping, and cascade deletes.",
+        "Implemented schema-validated AI drafting and CV/competency analysis as background jobs on Cloudflare Queues.",
+        "Stored uploads privately in R2 behind an owner-checked proxy, with Markdown and PDF export."
       ],
-      "technologies": ["TypeScript", "React", "Tailwind CSS", "Vite", "Markdown"]
+      "technologies": [
+        "TypeScript",
+        "React",
+        "Hono",
+        "Cloudflare Workers",
+        "Drizzle ORM",
+        "D1",
+        "AI/LLM"
+      ]
     }
   ],
   "achievements": [

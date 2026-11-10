@@ -29,6 +29,8 @@ export interface Project {
   responsibilities: string[];
   technologies: string[];
   link?: string;
+  /** Slug of the article in src/content/articles that documents this project. */
+  caseStudy?: string;
 }
 
 export interface Achievement {

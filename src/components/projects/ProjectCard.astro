@@ -35,8 +35,17 @@ const num = String(index + 1).padStart(3, "0");
     {project.technologies.map((tech) => <span class="p-tag p-tag--dark"><span>{tech}</span></span>)}
   </div>
 
-  <div class="project__go">
-    <span>{project.link ? "Live site" : "Case file"}</span>
-    <span aria-hidden="true">↗</span>
-  </div>
+  {
+    project.caseStudy ? (
+      <a class="project__go project__go--link" href={`/articles/${project.caseStudy}/`}>
+        <span>Read case study</span>
+        <span aria-hidden="true">→</span>
+      </a>
+    ) : (
+      <div class="project__go">
+        <span>{project.link ? "Live site" : "Case file"}</span>
+        <span aria-hidden="true">↗</span>
+      </div>
+    )
+  }
 </article>
