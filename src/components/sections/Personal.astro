@@ -1,22 +1,64 @@
 ---
+import { Image } from "astro:assets";
 import SectionHeader from "../common/SectionHeader.astro";
+import personal from "../../data/personal.json";
 import replay from "../../data/apple-music.json";
 
 const { playlist, topArtists } = replay;
 const year = playlist.title.match(/\d{4}/)?.[0] ?? "";
 const ranked = topArtists.slice(0, 6);
+
+// Optional cover art: drop a file into src/assets/personal/ and name it in
+// personal.json. Missing files fall back to a text-only card.
+const art = import.meta.glob<ImageMetadata>("/src/assets/personal/*.{jpg,jpeg,png,webp}", {
+  eager: true,
+  import: "default",
+});
+const artFor = (file?: string) => {
+  if (!file) return undefined;
+  const image = art[`/src/assets/personal/${file}`];
+  if (!image) console.warn(`[personal] missing cover art: src/assets/personal/${file}`);
+  return image;
+};
 ---
 
-{
-  ranked.length > 0 && (
-    <section id="listening" class="reveal">
-      <SectionHeader
-        index="VII"
-        title="Listening"
-        eyebrow="repertoire"
-        meta={`[ ${playlist.trackCount} tracks · apple music ]`}
-      />
+<section id="personal" class="reveal">
+  <SectionHeader
+    index="VII"
+    title="Personal"
+    eyebrow="off the clock"
+    meta={`[ updated ${personal.updated} ]`}
+  />
 
+  <div class="now-rack">
+    {
+      personal.now.map((item) => {
+        const image = artFor(item.image);
+        return (
+          <article class="now-card">
+            {image && (
+              <Image
+                src={image}
+                alt=""
+                width={240}
+                height={240}
+                class="now-card__art"
+                style={`object-position: ${item.focus ?? "50% 50%"}`}
+              />
+            )}
+            <div class="now-card__body">
+              <span class="now-card__kind">{item.status}</span>
+              <h3 class="now-card__title">{item.title}</h3>
+              <p class="now-card__note">{item.note}</p>
+            </div>
+          </article>
+        );
+      })
+    }
+  </div>
+
+  {
+    ranked.length > 0 && (
       <div class="listen-grid">
         <div class="listen-frame">
           <iframe
@@ -83,6 +125,6 @@ const ranked = topArtists.slice(0, 6);
           </a>
         </div>
       </div>
-    </section>
-  )
-}
+    )
+  }
+</section>

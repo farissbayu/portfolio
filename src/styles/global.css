@@ -1382,10 +1382,73 @@ html:not(.js) main.deck > .deck-track > section + section,
 }
 
 .listen-frame {
-  height: 420px;
+  height: 380px;
   overflow: hidden;
   border: 1px solid var(--border-hairline);
   background: var(--surface-sunken);
+}
+
+/* personal — what is on the desk right now */
+.now-rack {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin-bottom: 1.4rem;
+}
+
+.now-card {
+  display: flex;
+  align-items: stretch;
+  padding: 0;
+  overflow: hidden;
+  background: var(--surface-raised);
+  border: 1px solid var(--border-hairline);
+}
+
+.now-card__art {
+  width: 112px;
+  height: auto;
+  flex-shrink: 0;
+  align-self: stretch;
+  object-fit: cover;
+  border-right: 1px solid var(--border-hairline);
+}
+
+.now-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.9rem 1rem;
+}
+
+.now-card__kind {
+  align-self: flex-start;
+  padding: 0.1rem 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--on-accent);
+  background: var(--accent);
+  transform: skewX(-8deg);
+}
+
+.now-card__title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text-strong);
+}
+
+.now-card__note {
+  max-width: 42ch;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: var(--text-muted);
 }
 
 .artist-row {
@@ -1597,6 +1660,10 @@ html:not(.js) main.deck > .deck-track > section + section,
 
   .skills {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .now-rack {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .listen-grid {

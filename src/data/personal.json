@@ -1,0 +1,19 @@
+{
+  "updated": "Nov 2026",
+  "now": [
+    {
+      "status": "playing",
+      "title": "The Legend of Zelda: Breath of the Wild",
+      "note": "Playing it slowly — wandering Hyrule with no objective at all.",
+      "image": "zelda-botw.jpg",
+      "focus": "85% 50%"
+    },
+    {
+      "status": "last watched",
+      "title": "Resident Evil",
+      "note": "Most recent finish — the Netflix series.",
+      "image": "resident-evil.jpg",
+      "focus": "50% 50%"
+    }
+  ]
+}
